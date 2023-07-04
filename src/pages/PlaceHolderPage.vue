@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>Place Holder - Stock Exchange</h1>
+        <p>{{ testCacheData }}</p>
         <p>{{ test }}</p>
         <p>{{ array }}</p>
     </div>
@@ -12,8 +13,9 @@ import * as data from 'src/components/PropData.js';
 export default {
     data () {
         return {
-            array: data.arrayData
-        }
+            array: data.arrayData,
+            testCacheData: data.data[0].open
+        };
     },
     computed: {
         test () {
