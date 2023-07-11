@@ -31,17 +31,30 @@ export default {
     },
     methods: {
         testAPI () {
-            axios.get('http://api.marketstack.com/v1/eod/latest',
+            axios.get('http://api.marketstack.com/v1/exchanges/XNAS/tickers',
                 {
                     params: {
                         access_key: APIKEY,
-                        symbols: 'AAPL'
+                        limit: 20
                     }
                 }
             )
                 .then(response => {
-                    console.log(response.data);
+                    const data = response.data.data;
+                    localStorage.setItem('XNAS20Tickers', JSON.stringify(data));
+                    console.log(localStorage.getItem('XNAS20Tickers'));
                 })
+            // axios.get('http://api.marketstack.com/v1/eod/latest',
+            //     {
+            //         params: {
+            //             access_key: APIKEY,
+            //             symbols: 'AAPL'
+            //         }
+            //     }
+            // )
+            //     .then(response => {
+            //         console.log(response.data);
+            //     })
         }
     }
 };
