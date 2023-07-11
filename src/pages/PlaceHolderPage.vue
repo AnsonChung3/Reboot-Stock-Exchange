@@ -15,7 +15,7 @@
 <script>
 import * as data from 'src/components/PropData.js';
 import { axios } from 'boot/axios.js';
-// import { APIKEY } from 'components/APIKEY.js';
+import { APIKEY } from 'components/APIKEY.js';
 
 export default {
     data () {
@@ -28,27 +28,20 @@ export default {
         test () {
             return data.numData + 1;
         }
-        // array () {
-        //     return data.arrayData;
-        // }
     },
     methods: {
         testAPI () {
-            axios.get('https://reddit.com/r/pics.json')
+            axios.get('http://api.marketstack.com/v1/eod/latest',
+                {
+                    params: {
+                        access_key: APIKEY,
+                        symbols: 'AAPL'
+                    }
+                }
+            )
                 .then(response => {
-                    console.log(response);
+                    console.log(response.data);
                 })
-            // axios.get('http://api.marketstack.com/v1/eod/latest',
-            //     {
-            //         params: {
-            //             access_key: APIKEY,
-            //             symbols: 'AAPL'
-            //         }
-            //     }
-            // )
-            //     .then(response => {
-            //         console.log(response.data);
-            //     })
         }
     }
 };
