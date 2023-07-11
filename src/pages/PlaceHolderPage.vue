@@ -2,6 +2,11 @@
     <div>
         <h1>Place Holder - Stock Exchange</h1>
         <q-btn
+            label='testLocalStorage'
+            @click="testLocalStorage"
+            outline
+        />
+        <q-btn
             label='test axios'
             @click="testAPI"
             outline
@@ -30,6 +35,14 @@ export default {
         }
     },
     methods: {
+        testLocalStorage () {
+            const obj = JSON.parse(localStorage.getItem('XNAS20Tickers'));
+            console.log(obj);
+            console.log(obj.tickers);
+            for (let i = 0; i < obj.tickers.length; i++) {
+                console.log(obj.tickers[i].name);
+            }
+        },
         testAPI () {
             axios.get('http://api.marketstack.com/v1/exchanges/XNAS/tickers',
                 {
