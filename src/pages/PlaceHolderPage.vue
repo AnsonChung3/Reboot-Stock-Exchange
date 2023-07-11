@@ -1,6 +1,11 @@
 <template>
     <div>
         <h1>Place Holder - Stock Exchange</h1>
+        <q-btn
+            label='test axios'
+            @click="testAPI"
+            outline
+        />
         <p>{{ testCacheData }}</p>
         <p>{{ test }}</p>
         <p>{{ array }}</p>
@@ -9,6 +14,8 @@
 
 <script>
 import * as data from 'src/components/PropData.js';
+import { axios } from 'boot/axios.js';
+// import { APIKEY } from 'components/APIKEY.js';
 
 export default {
     data () {
@@ -24,6 +31,25 @@ export default {
         // array () {
         //     return data.arrayData;
         // }
+    },
+    methods: {
+        testAPI () {
+            axios.get('https://reddit.com/r/pics.json')
+                .then(response => {
+                    console.log(response);
+                })
+            // axios.get('http://api.marketstack.com/v1/eod/latest',
+            //     {
+            //         params: {
+            //             access_key: APIKEY,
+            //             symbols: 'AAPL'
+            //         }
+            //     }
+            // )
+            //     .then(response => {
+            //         console.log(response.data);
+            //     })
+        }
     }
 };
 </script>
