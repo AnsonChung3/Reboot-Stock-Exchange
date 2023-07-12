@@ -36,24 +36,34 @@ export default {
     },
     methods: {
         testLocalStorage () {
-            const obj = JSON.parse(localStorage.getItem('XNAS20Tickers'));
-            console.log(obj);
-            console.log(obj.tickers);
-            for (let i = 0; i < obj.tickers.length; i++) {
-                console.log(obj.tickers[i].name);
+            const array = JSON.parse(localStorage.getItem('AAPL2022EodPrices'));
+            console.log(array.length);
+            const filter = [];
+            for (let i = 0; i < array.length; i += 9) {
+                filter.push(array[i].open);
             }
+            console.log(filter);
+        },
         },
         testAPI () {
-            axios.get('http://api.marketstack.com/v1',
+            axios.get('http://api.marketstack.com/v1/eod',
                 {
                     params: {
-                        access_key: APIKEY
+                        access_key: APIKEY,
+                        // request count is on tickers,
+                        // so 1 eod/latest for 2 tickers, counts as 2 requests
+                        // but 2 days of eod for 1 ticker, counts as 1 request
+                        // symbols: 'AAPL, MSFT',
+                        symbols: 'AAPL',
+                        date_from: '2022-01-01',
+                        date_to: '2022-12-31',
+                        limit: 1000
                     }
                 }
             )
                 .then(response => {
-                    console.log(response.data);
-                })
+                    localStorage.setItem('AAPL2022EodPrices', JSON.stringify(response.data.data));
+                });
         }
     }
 };
