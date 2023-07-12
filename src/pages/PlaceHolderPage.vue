@@ -44,30 +44,16 @@ export default {
             }
         },
         testAPI () {
-            axios.get('http://api.marketstack.com/v1/exchanges/XNAS/tickers',
+            axios.get('http://api.marketstack.com/v1',
                 {
                     params: {
-                        access_key: APIKEY,
-                        limit: 20
+                        access_key: APIKEY
                     }
                 }
             )
                 .then(response => {
-                    const data = response.data.data;
-                    localStorage.setItem('XNAS20Tickers', JSON.stringify(data));
-                    console.log(localStorage.getItem('XNAS20Tickers'));
+                    console.log(response.data);
                 })
-            // axios.get('http://api.marketstack.com/v1/eod/latest',
-            //     {
-            //         params: {
-            //             access_key: APIKEY,
-            //             symbols: 'AAPL'
-            //         }
-            //     }
-            // )
-            //     .then(response => {
-            //         console.log(response.data);
-            //     })
         }
     }
 };
