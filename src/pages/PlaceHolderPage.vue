@@ -64,8 +64,10 @@ export default {
                         // but 2 days of eod for 1 ticker, counts as 1 request
                         // symbols: 'AAPL, MSFT',
                         symbols: 'AAPL',
+                        // free plan only supports 12months of historic eod
+                        // so to get as much data as I can, can set the date_from one year ago
+                        // for my little project, it can be hard coded as is
                         date_from: '2022-01-01',
-                        date_to: '2022-12-31',
                         limit: 1000
                     }
                 }
