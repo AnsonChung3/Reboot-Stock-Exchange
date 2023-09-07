@@ -41,13 +41,13 @@ export default {
     },
     methods: {
         testLocalStorage () {
-            const array = JSON.parse(localStorage.getItem('AAPL2022EodPrices'));
+            const array = JSON.parse(localStorage.getItem('AAPLEodPrices'));
             console.log(array.length);
-            const filter = [];
-            for (let i = 0; i < array.length; i += 9) {
-                filter.push(array[i].open);
-            }
-            console.log(filter);
+            // const filter = [];
+            // for (let i = 0; i < array.length; i += 9) {
+            //     filter.push(array[i].open);
+            // }
+            // console.log(filter);
         },
         },
         testAPI () {
