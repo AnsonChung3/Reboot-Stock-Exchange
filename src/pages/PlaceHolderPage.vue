@@ -2,6 +2,8 @@
     <div>
         <h1>Place Holder - Stock Exchange</h1>
         <q-btn
+            label='initProject'
+            @click="initProject"
             outline
         />
         <div>
@@ -49,6 +51,8 @@ export default {
             // }
             // console.log(filter);
         },
+        initProject () {
+            console.log('init project');
         },
         testAPI () {
             axios.get('http://api.marketstack.com/v1/eod',
