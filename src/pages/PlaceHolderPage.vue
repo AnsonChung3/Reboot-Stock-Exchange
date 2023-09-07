@@ -73,7 +73,8 @@ export default {
                 }
             )
                 .then(response => {
-                    localStorage.setItem('AAPL2022EodPrices', JSON.stringify(response.data.data));
+                    console.log(response);
+                    localStorage.setItem('AAPLEodPrices', JSON.stringify(response.data.data));
                 });
         }
     }
