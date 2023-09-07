@@ -2,10 +2,15 @@
     <div>
         <h1>Place Holder - Stock Exchange</h1>
         <q-btn
-            label='testLocalStorage'
-            @click="testLocalStorage"
             outline
         />
+        <div>
+            <q-btn
+                label='testLocalStorage'
+                @click="testLocalStorage"
+                outline
+            />
+        </div>
         <q-btn
             label='test axios'
             @click="testAPI"
