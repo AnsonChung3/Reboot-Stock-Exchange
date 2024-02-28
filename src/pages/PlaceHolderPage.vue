@@ -2,7 +2,7 @@
     <div>
         <h1>Place Holder - Stock Exchange</h1>
         <q-btn
-            label='initProject'
+            label='init Project'
             @click="initProject"
             outline
         />
