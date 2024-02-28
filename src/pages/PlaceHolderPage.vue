@@ -6,55 +6,25 @@
             @click="initProject"
             outline
         />
-        <div>
-            <q-btn
-                label='testLocalStorage'
-                @click="testLocalStorage"
-                outline
-            />
-        </div>
-        <q-btn
-            label='test axios'
-            @click="testAPI"
-            outline
-        />
-        <p>{{ testCacheData }}</p>
-        <p>{{ test }}</p>
-        <p>{{ array }}</p>
     </div>
 </template>
 
 <script>
-import * as data from 'src/components/PropData.js';
+// import * as data from 'src/components/PropData.js';
 import { axios } from 'boot/axios.js';
 import { APIKEY } from 'components/APIKEY.js';
 
 export default {
     data () {
         return {
-            array: data.arrayData,
-            testCacheData: data.data[0].open
         };
     },
-    computed: {
-        test () {
-            return data.numData + 1;
-        }
-    },
     methods: {
-        testLocalStorage () {
-            const array = JSON.parse(localStorage.getItem('AAPLEodPrices'));
-            console.log(array.length);
-            // const filter = [];
-            // for (let i = 0; i < array.length; i += 9) {
-            //     filter.push(array[i].open);
-            // }
-            // console.log(filter);
-        },
         initProject () {
             console.log('init project');
+            this.callDataFromAPI();
         },
-        testAPI () {
+        callDataFromAPI () {
             axios.get('http://api.marketstack.com/v1/eod',
                 {
                     params: {
@@ -67,14 +37,16 @@ export default {
                         // free plan only supports 12? 6?months of historic eod
                         // so to get as much data as I can, can set the date_from one year ago
                         // for my little project, it can be hard coded as is
-                        date_from: '2022-01-01',
+                        date_from: '2024-02-26',
                         limit: 1000
                     }
                 }
             )
                 .then(response => {
-                    console.log(response);
-                    localStorage.setItem('AAPLEodPrices', JSON.stringify(response.data.data));
+                    const data = response.data.data;
+                    data.forEach((eod) => console.log(`
+                        exchange: ${eod.exchange}, symbol: ${eod.symbol}, price: ${eod.open}
+                    `));
                 });
         }
     }
