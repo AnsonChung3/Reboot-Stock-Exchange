@@ -3,7 +3,7 @@ import { APIKEY } from 'components/APIKEY.js';
 
 export function prototypeInit () {
     // the array of symbols should be populated from API response
-    const symbols = ['AAPL'];
+    const symbols = ['MSFT'];
     // with Array.forEach(), can loop through tickers, and have the price data come in sorted
     // date_from can also be set to dynamic, -6 months from present day
     symbols.forEach((ticker) => {
@@ -18,9 +18,9 @@ export function prototypeInit () {
         )
             .then(response => {
                 const data = JSON.stringify(response.data.data.map((day) => day.open));
-                localStorage.setItem('AAPL_Price_data', data);
+                localStorage.setItem('MSFT_Price_data', data);
                 console.log('reading frm local storage');
-                console.log(localStorage.getItem('AAPL_Price_data'));
+                console.log(localStorage.getItem('MSFT_Price_data'));
             })
     })
     // all the data can then be stored in local storage
