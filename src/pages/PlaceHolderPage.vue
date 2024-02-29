@@ -1,11 +1,21 @@
 <template>
     <div>
         <h1>Place Holder - Stock Exchange</h1>
+        <p>{{ test }}</p>
+        <p>{{ market }}</p>
         <q-btn
             label='init Project'
             @click="initProject"
             outline
         />
+        <q-btn
+            label="next day"
+            @click="day++"
+            outline
+        />
+        <div v-for="(stock, i) in market" :key="i">
+            symbol: {{ market[i].symbol }}, price: {{ market[i].priceHistory[day] }}
+        </div>
     </div>
 </template>
 
@@ -13,17 +23,33 @@
 // import * as data from 'src/components/PropData.js';
 // import { axios } from 'boot/axios.js';
 // import { APIKEY } from 'components/APIKEY.js';
-import * as helpers from 'components/helpers.js';
+// import * as helpers from 'components/helpers.js';
 
 export default {
     data () {
         return {
+            day: 0
         };
+    },
+    computed: {
+        test () {
+            return this.$store.state.game.test;
+        },
+        market () {
+            return this.$store.state.game.marketData;
+        }
     },
     methods: {
         initProject () {
             console.log('init project');
-            helpers.prototypeInit();
+            // helpers.prototypeInitStore();
+            this.prototypeInitStore();
+        },
+        prototypeInitStore () {
+            const AAPL = JSON.parse(localStorage.getItem('AAPL_Price_data'));
+            const MSFT = JSON.parse(localStorage.getItem('MSFT_Price_data'));
+            this.$store.commit('game/addToMarket', { symbol: 'AAPL', priceHistory: AAPL });
+            this.$store.commit('game/addToMarket', { symbol: 'MSFT', priceHistory: MSFT });
         }
     }
 };
