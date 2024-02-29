@@ -1,6 +1,13 @@
 import { axios } from 'boot/axios.js';
 import { APIKEY } from 'components/APIKEY.js';
 
+export function prototypeInitStore () {
+    const AAPL = JSON.parse(localStorage.getItem('AAPL_Price_data'));
+    const MSFT = JSON.parse(localStorage.getItem('MSFT_Price_data'));
+    this.$store.commit('game/addToMarket', { symbol: 'AAPL', priceHistory: AAPL });
+    this.$store.commit('game/addToMarket', { symbol: 'MSFT', priceHistory: MSFT });
+}
+
 export function prototypeInit () {
     // the array of symbols should be populated from API response
     const symbols = ['MSFT'];
