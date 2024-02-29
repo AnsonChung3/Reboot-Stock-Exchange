@@ -1,5 +1,6 @@
 import { store } from 'quasar/wrappers';
 import { createStore } from 'vuex';
+import game from './game';
 
 // import example from './module-example'
 
@@ -12,7 +13,7 @@ import { createStore } from 'vuex';
 export default store(function (/* { ssrContext } */) {
     const Store = createStore({
         modules: {
-            // example
+            game
         },
 
         // enable strict mode (adds overhead!)
