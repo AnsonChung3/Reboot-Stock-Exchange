@@ -27,6 +27,7 @@
 // import { APIKEY } from 'components/APIKEY.js';
 // import * as helpers from 'components/helpers.js';
 import * as helpers from 'components/helpers.js';
+import { mapState } from 'vuex';
 
 export default {
     data () {
@@ -36,17 +37,17 @@ export default {
         };
     },
     computed: {
-        test () {
-            return this.$store.state.game.test;
-        },
-        market () {
-            return this.$store.state.game.marketData;
-        },
+        ...mapState({
+            test: state => state.game.test,
+            market: state => state.game.marketData,
+            funding: state => state.game.playerData.funding,
+            player: state => state.game.playerData
+        }),
         price () {
             return this.market[0].priceHistory[this.day];
         },
         sufficient () {
-            return (this.amount * this.price) < 100000 ? "enough" : "not enough";
+            return this.funding > (this.amount * this.price) ? "enough" : "not enough";
         }
     },
     methods: {
