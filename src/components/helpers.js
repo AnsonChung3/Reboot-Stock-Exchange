@@ -1,6 +1,29 @@
 import { axios } from 'boot/axios.js';
 import { APIKEY } from 'components/APIKEY.js';
 
+export function getTickers () {
+    axios.get('http://api.marketstack.com/v1/tickers',
+        {
+            params: {
+                access_key: APIKEY
+            }
+        }
+    )
+        .then(response => {
+            const data = response.data.data;
+            const array = [];
+            for (let i = 0; i < 3; i++) {
+                const share = {
+                    name: data[i].name,
+                    symbol: data[i].symbol
+                }
+                array.push(share)
+            }
+            console.log(array);
+            localStorage.setItem('Market_Info', JSON.stringify(array));
+        })
+}
+
 export function prototypeInitStore () {
     const AAPL = JSON.parse(localStorage.getItem('AAPL_Price_data'));
     const MSFT = JSON.parse(localStorage.getItem('MSFT_Price_data'));

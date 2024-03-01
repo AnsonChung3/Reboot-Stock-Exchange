@@ -4,8 +4,8 @@
         <p>{{ test }}</p>
         <p>{{ market }}</p>
         <q-btn
-            label='init Project'
-            @click="initProject"
+            label='getTickers'
+            @click="getTicker"
             outline
         />
         <q-btn
@@ -26,6 +26,7 @@
 // import { axios } from 'boot/axios.js';
 // import { APIKEY } from 'components/APIKEY.js';
 // import * as helpers from 'components/helpers.js';
+import * as helpers from 'components/helpers.js';
 
 export default {
     data () {
@@ -49,6 +50,9 @@ export default {
         }
     },
     methods: {
+        getTicker () {
+            helpers.getTickers();
+        },
         initProject () {
             console.log('init project');
             // helpers.prototypeInitStore();
