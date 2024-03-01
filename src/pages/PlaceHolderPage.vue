@@ -16,6 +16,8 @@
         <div v-for="(stock, i) in market" :key="i">
             symbol: {{ market[i].symbol }}, price: {{ market[i].priceHistory[day] }}
         </div>
+        <p> input amount <span><q-input v-model="amount"/></span></p>
+        <p>{{ sufficient }}</p>
     </div>
 </template>
 
@@ -28,7 +30,8 @@
 export default {
     data () {
         return {
-            day: 0
+            day: 0,
+            amount: 0
         };
     },
     computed: {
@@ -37,6 +40,16 @@ export default {
         },
         market () {
             return this.$store.state.game.marketData;
+        },
+        price () {
+            const price = this.market[0].priceHistory[this.day];
+            console.log(`current price for AAPL is ${price}`)
+            return price;
+        },
+        sufficient () {
+            console.log(`amout is ${this.amount}`);
+            console.log(`price is ${this.price}`);
+            return (this.amount * this.price) < 100000 ? "enough" : "not enough";
         }
     },
     methods: {
@@ -51,6 +64,9 @@ export default {
             this.$store.commit('game/addToMarket', { symbol: 'AAPL', priceHistory: AAPL });
             this.$store.commit('game/addToMarket', { symbol: 'MSFT', priceHistory: MSFT });
         }
+    },
+    created () {
+        this.initProject();
     }
 };
 </script>
