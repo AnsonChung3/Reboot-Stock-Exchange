@@ -42,13 +42,9 @@ export default {
             return this.$store.state.game.marketData;
         },
         price () {
-            const price = this.market[0].priceHistory[this.day];
-            console.log(`current price for AAPL is ${price}`)
-            return price;
+            return this.market[0].priceHistory[this.day];
         },
         sufficient () {
-            console.log(`amout is ${this.amount}`);
-            console.log(`price is ${this.price}`);
             return (this.amount * this.price) < 100000 ? "enough" : "not enough";
         }
     },
