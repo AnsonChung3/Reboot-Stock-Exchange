@@ -1,6 +1,12 @@
 <template>
     <div>
         <h1>Place Holder - Stock Exchange</h1>
+        <q-btn
+            label="test"
+            @click="addPropToObj"
+            outline
+        />
+        <p>{{ player }}</p>
         <p>{{ test }}</p>
         <p>{{ market }}</p>
         <q-btn
@@ -25,7 +31,6 @@
 // import * as data from 'src/components/PropData.js';
 // import { axios } from 'boot/axios.js';
 // import { APIKEY } from 'components/APIKEY.js';
-// import * as helpers from 'components/helpers.js';
 import * as helpers from 'components/helpers.js';
 import { mapState } from 'vuex';
 
@@ -33,7 +38,8 @@ export default {
     data () {
         return {
             day: 0,
-            amount: 0
+            amount: 0,
+            testObj: {}
         };
     },
     computed: {
@@ -51,6 +57,11 @@ export default {
         }
     },
     methods: {
+        addPropToObj () {
+            console.log(this.testObj);
+            this.testObj.propertA = 'a';
+            console.log(this.testObj);
+        },
         getTicker () {
             helpers.getTickers();
         },
