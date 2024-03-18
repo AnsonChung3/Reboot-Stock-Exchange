@@ -1,6 +1,17 @@
 import { axios } from 'boot/axios.js';
 import { APIKEY } from 'components/APIKEY.js';
 
+export function trimObj (obj) {
+    const filterProps = ['name', 'symbol'];
+    return Object.fromEntries(
+        Object.entries(obj).filter(([key, _]) => filterProps.includes(key))
+    );
+}
+
+export function mapPrices (array) {
+    return array.map(eod => eod.open);
+}
+
 export function getTickers () {
     axios.get('http://api.marketstack.com/v1/tickers',
         {
