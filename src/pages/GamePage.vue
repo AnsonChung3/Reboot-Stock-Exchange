@@ -4,6 +4,11 @@
         <div v-for="stock in market" :key="stock.symbol">
             <display-card :stock=stock></display-card>
         </div>
+        <q-btn
+            label='next day'
+            @click="incre"
+            outline
+        />
     </div>
 </template>
 
@@ -19,6 +24,11 @@ export default {
         ...mapState({
             market: state => state.game.marketData
         })
+    },
+    methods: {
+        incre () {
+            this.$store.state.game.gameCycle += 1;
+        }
     },
     created () {
         if (localStorage.getItem('game_data') === null) {
