@@ -3,6 +3,11 @@ export default function () {
     test: 10,
     marketData: []
     marketData: [],
-    gameCycle: 0
+    playerData: {
+        funding: 100000,
+        holdings: []
+    },
+    gameCycle: 0,
+    lastPlayCycle: 5
   }
 }

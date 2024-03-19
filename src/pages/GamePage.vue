@@ -20,9 +20,24 @@ export default {
     components: {
         DisplayCard
     },
+    watch: {
+        currentCycle (newValue, oldValue) {
+            if (newValue === this.lastPlayCycle - 1) {
+                // at the moment last cycle is 5
+                // when newValue hits 5, before the display cards updates,
+                // watcher is triggered
+                // display cards only updates after the alert is dismissed
+                alert('the next cycle is the last playable');
+            } else if (newValue === this.lastPlayCycle) {
+                alert('this is the end of game, showing end screen next');
+            }
+        }
+    },
     computed: {
         ...mapState({
-            market: state => state.game.marketData
+            market: state => state.game.marketData,
+            currentCycle: state => state.game.gameCycle,
+            lastPlayCycle: state => state.game.lastPlayCycle
         })
     },
     methods: {

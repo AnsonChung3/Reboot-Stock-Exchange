@@ -17,7 +17,8 @@ export default {
     computed: {
         startCycle () {
             if (this.stock.prices != null) {
-                return Math.floor(Math.random() * this.stock.prices.length - 10);
+                // return Math.floor(Math.random() * this.stock.prices.length - 10);
+                return this.stock.prices.length - (this.$store.state.game.lastPlayCycle + 1);
             } else {
                 return 0;
             }
