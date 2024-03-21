@@ -3,7 +3,7 @@ export default function () {
     test: 10,
     marketData: []
     marketData: [],
-    playerData: {
+    playerAccount: {
         funding: 100000,
         holdings: []
     },
