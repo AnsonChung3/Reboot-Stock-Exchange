@@ -47,6 +47,9 @@ export default {
         currentCycle () {
             return this.startCycle + this.$store.state.game.gameCycle;
         },
+        funding () {
+            return this.$store.state.game.playerAccount.funding;
+        },
         sufficientFund () {
             return this.tradeQty !== undefined && this.funding >= (this.tradeQty * this.stock.prices[this.currentCycle]);
         },
