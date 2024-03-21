@@ -35,14 +35,7 @@ export default {
     },
     computed: {
         startCycle () {
-            if (this.stock.prices != null) {
-                // return Math.floor(Math.random() * this.stock.prices.length - 10);
-                return this.stock.prices.length - (this.$store.state.game.lastPlayableCycle + 1);
-            } else {
-                // else block is useful when dev data only consists prices for 2/4 stocks
-                // to save some API requests
-                return 0;
-            }
+            return this.stock.prices === undefined ? 0 : (this.stock.prices.length - (this.$store.state.game.lastPlayableCycle + 1));
         },
         currentCycle () {
             return this.startCycle + this.$store.state.game.gameCycle;
@@ -54,13 +47,7 @@ export default {
             return this.tradeQty !== undefined && this.funding >= (this.tradeQty * this.stock.prices[this.currentCycle]);
         },
         tradeAmt () {
-            if (this.tradeQty !== undefined) {
-                return (this.tradeQty * this.stock.prices[this.currentCycle]).toFixed(2);
-            }
-            return 0;
-        },
-        funding () {
-            return this.$store.state.game.playerAccount.funding;
+            return this.tradeQty === undefined ? 0 : (this.tradeQty * this.stock.prices[this.currentCycle]).toFixed(2);
         }
     },
     methods: {
