@@ -20,6 +20,8 @@ export default {
                 // return Math.floor(Math.random() * this.stock.prices.length - 10);
                 return this.stock.prices.length - (this.$store.state.game.lastPlayableCycle + 1);
             } else {
+                // else block is useful when dev data only consists prices for 2/4 stocks
+                // to save some API requests
                 return 0;
             }
         },
