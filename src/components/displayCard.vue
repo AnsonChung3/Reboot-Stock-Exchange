@@ -56,7 +56,7 @@ export default {
                 alert("Please input value greater than zero");
                 return;
             }
-            console.log(`trade qty is ${this.tradeQty}, price is ${this.stock.prices[this.currentCycle]}`);
+            this.$store.dispatch('game/trade', { symbol: this.stock.symbol, tradeAmt: this.tradeAmt, tradeQty: this.tradeQty });
         }
     }
 }

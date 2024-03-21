@@ -2,6 +2,26 @@ import { axios } from 'boot/axios.js';
 import { APIKEY } from 'components/APIKEY.js';
 import * as helpers from 'components/helpers.js';
 
+export function trade ({ state }, payload) {
+    const index = state.playerAccount.holdings.findIndex(stock => stock.symbol === payload.symbol);
+    // this is buying logic
+    if (payload.tradeQty > 0) {
+        if (index < 0) {
+            console.log('create new holding');
+        } else {
+            console.log('add to existing holdings of stock');
+        }
+    } else {
+        // this is selling logic
+        if (payload.tradeQty === state.playerAccount.holdings[index].quantity) {
+            console.log('sell all');
+        } else {
+            console.log('see part of the existing stock');
+        }
+    }
+    // change funding in state
+}
+
 export async function initGameData () {
     // console.log('action - init game data');
 
