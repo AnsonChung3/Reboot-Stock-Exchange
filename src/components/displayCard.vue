@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div>trade amt is {{ tradeAmt }}</div>
         <div>Name: {{ stock.name }}</div>
         <div>Symbol: {{ stock.symbol }}</div>
         <div>Prices: {{ stock.prices }}</div>
@@ -16,6 +17,7 @@
             label="buy"
             @click="buy"
             outline
+            :disabled="!sufficientFund"
         />
         <hr>
     </div>
@@ -44,6 +46,18 @@ export default {
         },
         currentCycle () {
             return this.startCycle + this.$store.state.game.gameCycle;
+        },
+        sufficientFund () {
+            return this.tradeQty !== undefined && this.funding >= (this.tradeQty * this.stock.prices[this.currentCycle]);
+        },
+        tradeAmt () {
+            if (this.tradeQty !== undefined) {
+                return (this.tradeQty * this.stock.prices[this.currentCycle]).toFixed(2);
+            }
+            return 0;
+        },
+        funding () {
+            return this.$store.state.game.playerAccount.funding;
         }
     },
     methods: {
@@ -52,7 +66,6 @@ export default {
                 alert("Please input value greater than zero");
                 return;
             }
-            // btn disabled if not enough funding
             console.log(`trade qty is ${this.tradeQty}, price is ${this.stock.prices[this.currentCycle]}`);
         }
     }
