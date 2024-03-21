@@ -22,9 +22,9 @@ export default {
     },
     watch: {
         currentCycle (newValue, oldValue) {
-            if (newValue === this.lastPlayCycle - 1) {
+            if (newValue === this.lastPlayableCycle - 1) {
                 alert('the next cycle is the last playable');
-            } else if (newValue === this.lastPlayCycle) {
+            } else if (newValue === this.lastPlayableCycle) {
                 alert('this is the end of game, showing end screen next');
             }
         }
@@ -33,7 +33,7 @@ export default {
         ...mapState({
             market: state => state.game.marketData,
             currentCycle: state => state.game.gameCycle,
-            lastPlayCycle: state => state.game.lastPlayCycle
+            lastPlayableCycle: state => state.game.lastPlayableCycle
         })
     },
     methods: {

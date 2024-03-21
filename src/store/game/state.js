@@ -8,6 +8,6 @@ export default function () {
         holdings: []
     },
     gameCycle: 0,
-    lastPlayCycle: 5
+    lastPlayableCycle: 5
   }
 }
