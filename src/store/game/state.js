@@ -1,10 +1,9 @@
 export default function () {
   return {
-    test: 10,
-    marketData: []
+    test: 90,
     marketData: [],
     playerAccount: {
-        funding: 100000,
+        funding: 100000 * 100,
         holdings: []
     },
     gameCycle: 0,

@@ -9,7 +9,8 @@ export function trimObj (obj) {
 }
 
 export function mapPrices (array) {
-    return array.map(eod => eod.open);
+    // multiply data from API by 100 to force decimals into integers
+    return array.map(eod => eod.open * 100);
 }
 
 export function getTickers () {

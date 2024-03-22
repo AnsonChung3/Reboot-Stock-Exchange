@@ -3,7 +3,7 @@
         <div>trade amt is {{ tradeAmt }}</div>
         <div>Name: {{ stock.name }}</div>
         <div>Symbol: {{ stock.symbol }}</div>
-        <div>Prices: {{ stock.prices }}</div>
+        <div>Prices: {{ stock.prices[currentCycle]/100 }}</div>
         <div>Start Cycle: {{ startCycle }}</div>
         <div>Current Cycle: {{ currentCycle }}</div>
         <q-input
