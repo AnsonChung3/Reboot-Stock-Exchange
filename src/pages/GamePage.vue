@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Game.vue</h1>
-        <div>Current Fund: {{ displayFunding }}</div>
+        <h2>Market</h2>
         <div v-for="stock in market" :key="stock.symbol">
             <display-card :stock=stock></display-card>
         </div>
@@ -10,6 +10,8 @@
             @click="incre"
             outline
         />
+        <h2>Account</h2>
+        <div>Current Fund: {{ displayFunding }}</div>
     </div>
 </template>
 
