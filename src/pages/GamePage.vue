@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>Game.vue</h1>
+        <div>Current Fund: {{ displayFunding }}</div>
         <div v-for="stock in market" :key="stock.symbol">
             <display-card :stock=stock></display-card>
         </div>
@@ -33,8 +34,12 @@ export default {
         ...mapState({
             market: state => state.game.marketData,
             currentCycle: state => state.game.gameCycle,
-            lastPlayableCycle: state => state.game.lastPlayableCycle
-        })
+            lastPlayableCycle: state => state.game.lastPlayableCycle,
+            funding: state => state.game.playerAccount.funding
+        }),
+        displayFunding () {
+            return (this.funding / 100).toFixed(2);
+        }
     },
     methods: {
         incre () {
