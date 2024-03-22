@@ -47,7 +47,7 @@ export default {
             return this.tradeQty !== undefined && this.funding >= (this.tradeQty * this.stock.prices[this.currentCycle]);
         },
         tradeAmt () {
-            return this.tradeQty === undefined ? 0 : (this.tradeQty * this.stock.prices[this.currentCycle]).toFixed(2);
+            return this.tradeQty === undefined ? 0 : (this.tradeQty * this.stock.prices[this.currentCycle]);
         }
     },
     methods: {
@@ -56,7 +56,11 @@ export default {
                 alert("Please input value greater than zero");
                 return;
             }
-            this.$store.dispatch('game/trade', { symbol: this.stock.symbol, tradeAmt: this.tradeAmt, tradeQty: this.tradeQty });
+            this.$store.dispatch('game/trade', {
+                symbol: this.stock.symbol,
+                tradeAmt: -this.tradeAmt,
+                tradeQty: Number(this.tradeQty)
+            });
         }
     }
 }
