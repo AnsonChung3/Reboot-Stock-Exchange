@@ -33,7 +33,7 @@ export function trade ({ state, commit }, payload) {
     commit('mutateFunding', payload.tradeAmt);
 }
 
-export async function initGameData () {
+export async function initGameData ({ commit }) {
     // response 1 is the unhandled raw response
     const response1 = await axios.get('http://api.marketstack.com/v1/tickers',
     {
@@ -68,6 +68,7 @@ export async function initGameData () {
     Promise.all(promises).then(() => {
             // local storage set item
             localStorage.setItem('game_data', JSON.stringify(gameData));
+            commit('initGameMarket', { gameData });
             // call mutation, and populate store from local storage
         }
     )
