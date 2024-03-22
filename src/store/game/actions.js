@@ -43,14 +43,14 @@ export async function initGameData ({ commit }) {
     });
 
     const gameData = [];
-    // response one get's handled here
-    for (let i = 0; i <= 3; i++) {
+    // for (let i = 0; i <= 3; i++) {
+    // range for the below for loop is for only one testing stock data
+    for (let i = 0; i < 1; i++) {
         gameData.push(helpers.trimObj(response1.data.data[i]));
     };
 
     const promises = [];
-    // IT USES 2 API REQUETS IN ONE GO
-    for (let i = 0; i <= 1; i++) {
+    for (let i = 0; i < gameData.length; i++) {
         promises.push(axios.get('http://api.marketstack.com/v1/eod',
                 {
                     params: {
@@ -66,10 +66,8 @@ export async function initGameData ({ commit }) {
     }
 
     Promise.all(promises).then(() => {
-            // local storage set item
             localStorage.setItem('game_data', JSON.stringify(gameData));
             commit('initGameMarket', { gameData });
-            // call mutation, and populate store from local storage
         }
     )
 }
