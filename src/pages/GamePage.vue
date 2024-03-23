@@ -3,7 +3,7 @@
         <h1>Game.vue</h1>
         <h2>Market</h2>
         <div v-for="stock in market" :key="stock.symbol">
-            <display-card :stock=stock></display-card>
+            <display-buy :stock=stock></display-buy>
         </div>
         <q-btn
             label='next day'
@@ -17,11 +17,11 @@
 
 <script>
 import { mapState } from 'vuex';
-import DisplayCard from 'components/displayCard.vue';
+import DisplayBuy from 'components/displayBuy.vue';
 
 export default {
     components: {
-        DisplayCard
+        DisplayBuy
     },
     watch: {
         currentCycle (newValue, oldValue) {

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div>trade amt is {{ tradeAmt }}</div>
         <div>Name: {{ stock.name }}</div>
         <div>Symbol: {{ stock.symbol }}</div>
         <div>Prices: {{ stock.prices[currentCycle]/100 }}</div>
