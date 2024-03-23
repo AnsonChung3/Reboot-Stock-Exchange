@@ -3,7 +3,6 @@ export function mutateHoldings (state, payload) {
         case 'CREATE':
             delete payload.case;
             state.playerAccount.holdings.push(payload);
-            console.log(state.playerAccount);
             break;
         case 'ADD':
             state.playerAccount.holdings[payload.index].quantity += payload.quantity;
