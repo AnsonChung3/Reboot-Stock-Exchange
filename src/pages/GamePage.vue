@@ -51,10 +51,10 @@ export default {
     created () {
         if (localStorage.getItem('game_data') === null) {
             // testing this one is bit expensive, use with caution
-            // console.log('datad not found, call to init data');
+            console.log('datad not found, call to init data');
             this.$store.dispatch('game/initGameData');
         } else {
-            // console.log('game_data is not null');
+            console.log('game_data is not null');
             const data = JSON.parse(localStorage.getItem('game_data'));
             this.$store.commit('game/initGameMarket', { data });
         }
