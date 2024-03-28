@@ -4,14 +4,11 @@ export function mutateHoldings (state, payload) {
             delete payload.case;
             state.playerAccount.holdings.push(payload);
             break;
-        case 'ADD':
-            state.playerAccount.holdings[payload.index].quantity += payload.quantity;
-            break;
         case 'REMOVE':
             state.playerAccount.holdings.splice([payload.index], 1);
             console.log(state.playerAccount.holdings);
             break;
-        case 'DEDUCT':
+        case 'TRADE':
             state.playerAccount.holdings[payload.index].quantity += payload.quantity;
             break;
     }

@@ -7,31 +7,21 @@ export function trade ({ state, commit }, payload) {
     commit('mutateFunding', payload.tradeAmt);
 
     const index = state.playerAccount.holdings.findIndex(stock => stock.symbol === payload.symbol);
+    payload.index = index;
     // this is buying logic
-    if (payload.quantity > 0) {
-        if (index < 0) {
-            console.log('create new holding');
-            payload.case = 'CREATE';
-            delete payload.tradeAmt;
-            commit('mutateHoldings', payload)
-        } else {
-            console.log('add to existing holdings of stock');
-            payload.case = 'ADD';
-            payload.index = index;
-            commit('mutateHoldings', payload)
-        }
+    if (payload.quantity > 0 && index < 0) {
+        console.log('create new holding');
+        payload.case = 'CREATE';
+        delete payload.tradeAmt;
+        commit('mutateHoldings', payload)
+    } else if (-payload.quantity === state.playerAccount.holdings[index].quantity) {
+        console.log('sell all');
+        payload.case = 'REMOVE';
+        commit('mutateHoldings', payload);
     } else {
-        // this is selling logic
-        payload.index = index;
-        if (-payload.quantity === state.playerAccount.holdings[index].quantity) {
-            console.log('sell all');
-            payload.case = 'REMOVE';
-            commit('mutateHoldings', payload);
-        } else {
-            console.log('see part of the existing stock');
-            payload.case = 'DEDUCT';
-            commit('mutateHoldings', payload);
-        }
+        console.log('trade');
+        payload.case = 'TRADE';
+        commit('mutateHoldings', payload)
     }
 }
 
