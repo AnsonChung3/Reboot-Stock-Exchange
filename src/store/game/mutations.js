@@ -17,6 +17,8 @@ export function mutateFunding (state, payload) {
 
 export function initGameMarket (state, payload) {
     for (let i = 0; i < payload.data.length; i++) {
+        const MAX = payload.data[i].prices.length - state.lastPlayableCycle + 1;
+        payload.data[i].startCycle = Math.floor(Math.random() * (MAX + 1));
         state.marketData.push(payload.data[i]);
     }
 }
