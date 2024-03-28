@@ -11,16 +11,23 @@
             outline
         />
         <h2>Account</h2>
-        <div>Current Fund: {{ displayFunding }}</div>
+        <h3>Current Fund</h3>
+        <div>{{ displayFunding }}</div>
+        <h3>Holdings</h3>
+        <div v-for="(holding, i) in holdings" :key="i">
+            <display-sell :holding=holding></display-sell>
+        </div>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import DisplayBuy from 'components/displayBuy.vue';
+import DisplaySell from 'components/displaySell.vue';
 
 export default {
     components: {
+        DisplaySell,
         DisplayBuy
     },
     watch: {
@@ -37,7 +44,8 @@ export default {
             market: state => state.game.marketData,
             currentCycle: state => state.game.gameCycle,
             lastPlayableCycle: state => state.game.lastPlayableCycle,
-            funding: state => state.game.playerAccount.funding
+            funding: state => state.game.playerAccount.funding,
+            holdings: state => state.game.playerAccount.holdings
         }),
         displayFunding () {
             return (this.funding / 100).toFixed(2);

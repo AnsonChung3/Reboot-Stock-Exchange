@@ -1,10 +1,9 @@
 <template>
     <div>
-        <div>Name: {{ stock.name }}</div>
-        <div>Symbol: {{ stock.symbol }}</div>
-        <div>Prices: {{ stock.prices[currentCycle]/100 }}</div>
-        <div>Start Cycle: {{ startCycle }}</div>
-        <div>Current Cycle: {{ currentCycle }}</div>
+        <h4>Name: {{ holding.name }}</h4>
+        <div>Symbol: {{ holding.symbol }}</div>
+        <div>Holding quantity: {{ holding.quantity }}</div>
+        <div>Current Price: {{ currentPrice }}</div>
         <q-input
             v-model="tradeQty"
             type="number"
@@ -13,10 +12,10 @@
             dark
         />
         <q-btn
-            label="buy"
-            @click="buy"
+            label="sell"
+            @click="sell"
             outline
-            :disabled="!sufficientFund"
+            :disabled="!enableSell"
         />
         <hr>
     </div>
@@ -25,7 +24,7 @@
 <script>
 export default {
     props: {
-        stock: Object
+        holding: Object
     },
     data () {
         return {
@@ -33,33 +32,30 @@ export default {
         };
     },
     computed: {
-        startCycle () {
-            return this.stock.prices === undefined ? 0 : (this.stock.prices.length - (this.$store.state.game.lastPlayableCycle + 1));
-        },
-        currentCycle () {
-            return this.startCycle + this.$store.state.game.gameCycle;
-        },
-        funding () {
-            return this.$store.state.game.playerAccount.funding;
-        },
-        sufficientFund () {
-            return this.tradeQty !== undefined && this.funding >= (this.tradeQty * this.stock.prices[this.currentCycle]);
+        currentPrice () {
+            const stock = this.$store.state.game.marketData.find((stock) => stock.symbol === this.holding.symbol);
+            const cycle = stock.startCycle + this.$store.state.game.gameCycle;
+            return stock.prices[cycle] / 100;
         },
         tradeAmt () {
-            return this.tradeQty === undefined ? 0 : (this.tradeQty * this.stock.prices[this.currentCycle]);
+            return this.tradeQty * this.currentPrice;
+        },
+        enableSell () {
+            return this.tradeQty > 0;
         }
     },
     methods: {
-        buy () {
-            if (this.tradeQty <= 0 || this.tradeQty === undefined) {
-                alert("Please input value greater than zero");
-                return;
-            }
-            this.$store.dispatch('game/trade', {
-                symbol: this.stock.symbol,
-                tradeAmt: -this.tradeAmt,
-                tradeQty: Number(this.tradeQty)
-            });
+        sell () {
+            // if (this.tradeQty <= 0 || this.tradeQty === undefined) {
+            //     alert("Please input value greater than zero");
+            //     return;
+            // }
+            // this.$store.dispatch('game/trade', {
+            //     symbol: this.stock.symbol,
+            //     tradeAmt: -this.tradeAmt,
+            //     tradeQty: Number(this.tradeQty)
+            // });
+            console.log('sell');
         }
     }
 }
