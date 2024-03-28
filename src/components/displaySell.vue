@@ -41,7 +41,7 @@ export default {
             return this.tradeQty * this.currentPrice;
         },
         enableSell () {
-            return this.tradeQty > 0;
+            return this.tradeQty > 0 && this.tradeQty <= this.holding.quantity;
         }
     },
     methods: {
