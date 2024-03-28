@@ -22,10 +22,15 @@ export function trade ({ state, commit }, payload) {
         }
     } else {
         // this is selling logic
-        if (payload.quantity === state.playerAccount.holdings[index].quantity) {
+        payload.index = index;
+        if (-payload.quantity === state.playerAccount.holdings[index].quantity) {
             console.log('sell all');
+            payload.case = 'REMOVE';
+            commit('mutateHoldings', payload);
         } else {
             console.log('see part of the existing stock');
+            payload.case = 'Deduct';
+            commit('mutateHoldings', payload);
         }
     }
 }

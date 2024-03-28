@@ -7,6 +7,13 @@ export function mutateHoldings (state, payload) {
         case 'ADD':
             state.playerAccount.holdings[payload.index].quantity += payload.quantity;
             break;
+        case 'REMOVE':
+            state.playerAccount.holdings.splice([payload.index], 1);
+            console.log(state.playerAccount.holdings);
+            break;
+        case 'DEDUCT':
+            state.playerAccount.holdings[payload.index].quantity += payload.quantity;
+            break;
     }
 }
 

@@ -46,16 +46,11 @@ export default {
     },
     methods: {
         sell () {
-            // if (this.tradeQty <= 0 || this.tradeQty === undefined) {
-            //     alert("Please input value greater than zero");
-            //     return;
-            // }
-            // this.$store.dispatch('game/trade', {
-            //     symbol: this.stock.symbol,
-            //     tradeAmt: -this.tradeAmt,
-            //     tradeQty: Number(this.tradeQty)
-            // });
-            console.log('sell');
+            this.$store.dispatch('game/trade', {
+                symbol: this.holding.symbol,
+                tradeAmt: this.tradeAmt,
+                quantity: Number(-this.tradeQty)
+            });
         }
     }
 }
