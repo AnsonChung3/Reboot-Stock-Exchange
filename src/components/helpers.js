@@ -7,5 +7,5 @@ export function trimObj (obj) {
 
 export function mapPrices (array) {
     // multiply data from API by 100 to force decimals into integers
-    return array.map(eod => eod.open * 100);
+    return array.map(eod => Math.floor(eod.open * 100));
 }
