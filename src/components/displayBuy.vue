@@ -34,11 +34,9 @@ export default {
         };
     },
     computed: {
-        startCycle () {
-            return this.stock.prices === undefined ? 0 : (this.stock.prices.length - (this.$store.state.game.lastPlayableCycle + 1));
-        },
         currentCycle () {
-            return this.startCycle + this.$store.state.game.gameCycle;
+            const stock = this.$store.state.game.marketData.find((stock) => stock.symbol === this.stock.symbol);
+            return stock.startCycle + this.$store.state.game.gameCycle;
         },
         funding () {
             return this.$store.state.game.playerAccount.funding;
@@ -48,6 +46,9 @@ export default {
         },
         tradeAmt () {
             return this.tradeQty === undefined ? 0 : (this.tradeQty * this.stock.prices[this.currentCycle]);
+        },
+        currentPrice () {
+            return this.stock.prices[this.currentCycle] / 100;
         }
     },
     methods: {
