@@ -3,7 +3,7 @@
         <h4>Name: {{ holding.name }}</h4>
         <div>Symbol: {{ holding.symbol }}</div>
         <div>Holding quantity: {{ holding.quantity }}</div>
-        <div>Current Price: {{ currentPrice }}</div>
+        <div>Current Price: {{ currentPrice/100 }}</div>
         <q-input
             v-model="tradeQty"
             type="number"
@@ -35,7 +35,7 @@ export default {
         currentPrice () {
             const stock = this.$store.state.game.marketData.find((stock) => stock.symbol === this.holding.symbol);
             const cycle = stock.startCycle + this.$store.state.game.gameCycle;
-            return stock.prices[cycle] / 100;
+            return stock.prices[cycle];
         },
         tradeAmt () {
             return this.tradeQty * this.currentPrice;

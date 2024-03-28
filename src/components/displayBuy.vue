@@ -3,7 +3,7 @@
         <div>trade amt is {{ tradeAmt }}</div>
         <div>Name: {{ stock.name }}</div>
         <div>Symbol: {{ stock.symbol }}</div>
-        <div>Prices: {{ currentPrice }}</div>
+        <div>Prices: {{ currentPrice/100 }}</div>
         <div>Current Cycle: {{ currentCycle }}</div>
         <div><br>All Prices:<br>{{ stock.prices }}<br></div>
         <q-input
@@ -48,7 +48,7 @@ export default {
             return this.tradeQty === undefined ? 0 : (this.tradeQty * this.stock.prices[this.currentCycle]);
         },
         currentPrice () {
-            return this.stock.prices[this.currentCycle] / 100;
+            return this.stock.prices[this.currentCycle];
         }
     },
     methods: {
