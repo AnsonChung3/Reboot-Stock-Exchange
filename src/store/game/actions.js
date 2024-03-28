@@ -29,7 +29,7 @@ export function trade ({ state, commit }, payload) {
             commit('mutateHoldings', payload);
         } else {
             console.log('see part of the existing stock');
-            payload.case = 'Deduct';
+            payload.case = 'DEDUCT';
             commit('mutateHoldings', payload);
         }
     }
