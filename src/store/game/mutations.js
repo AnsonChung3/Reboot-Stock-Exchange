@@ -20,9 +20,10 @@ export function mutateFunding (state, payload) {
 }
 
 export function initGameMarket (state, payload) {
+    // magic number 100 because default data coming back from API is 100 trade days
+    const MAX = 100 - state.lastPlayableCycle + 1;
+    state.startCycle = Math.floor(Math.random() * (MAX + 1));
     for (let i = 0; i < payload.data.length; i++) {
-        const MAX = payload.data[i].prices.length - state.lastPlayableCycle + 1;
-        payload.data[i].startCycle = Math.floor(Math.random() * (MAX + 1));
         state.marketData.push(payload.data[i]);
     }
 }

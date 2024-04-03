@@ -32,10 +32,12 @@ export default {
         };
     },
     computed: {
+        currentCycle () {
+            return this.$store.state.game.startCycle + this.$store.state.game.gameCycle;
+        },
         currentPrice () {
             const stock = this.$store.state.game.marketData.find((stock) => stock.symbol === this.holding.symbol);
-            const cycle = stock.startCycle + this.$store.state.game.gameCycle;
-            return stock.prices[cycle];
+            return stock.prices[this.currentCycle];
         },
         tradeAmt () {
             return this.tradeQty * this.currentPrice;

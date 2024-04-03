@@ -35,8 +35,7 @@ export default {
     },
     computed: {
         currentCycle () {
-            const stock = this.$store.state.game.marketData.find((stock) => stock.symbol === this.stock.symbol);
-            return stock.startCycle + this.$store.state.game.gameCycle;
+            return this.$store.state.game.startCycle + this.$store.state.game.gameCycle;
         },
         funding () {
             return this.$store.state.game.playerAccount.funding;
