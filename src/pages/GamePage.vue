@@ -13,6 +13,8 @@
         <h2>Account</h2>
         <h3>Current Fund</h3>
         <div>{{ displayFunding }}</div>
+        <h3>Total value of fund and holdings</h3>
+        <div>{{ valueofHolding/100 }}</div>
         <h3>Holdings</h3>
         <div v-for="(holding, i) in holdings" :key="i">
             <display-sell :holding=holding></display-sell>
@@ -49,6 +51,21 @@ export default {
         }),
         displayFunding () {
             return (this.funding / 100).toFixed(2);
+        },
+        currentCycle () {
+            return this.$store.state.game.startCycle + this.$store.state.game.gameCycle;
+        },
+        valueofHolding () {
+            let totalValue = 0;
+            if (this.holdings.length === 0) {
+                return totalValue;
+            }
+            for (let i = 0; i < this.holdings.length; i++) {
+                const stock = this.market.find((stock) => stock.symbol === this.holdings[i].symbol);
+                const price = stock.prices[this.currentCycle];
+                totalValue += (this.holdings[i].quantity * price);
+            }
+            return totalValue;
         }
     },
     methods: {
