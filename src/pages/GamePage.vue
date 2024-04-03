@@ -31,7 +31,7 @@ export default {
         DisplayBuy
     },
     watch: {
-        currentCycle (newValue, oldValue) {
+        gameCycle (newValue, oldValue) {
             if (newValue === this.lastPlayableCycle - 1) {
                 alert('the next cycle is the last playable');
             } else if (newValue === this.lastPlayableCycle) {
@@ -42,7 +42,7 @@ export default {
     computed: {
         ...mapState({
             market: state => state.game.marketData,
-            currentCycle: state => state.game.gameCycle,
+            gameCycle: state => state.game.gameCycle,
             lastPlayableCycle: state => state.game.lastPlayableCycle,
             funding: state => state.game.playerAccount.funding,
             holdings: state => state.game.playerAccount.holdings
