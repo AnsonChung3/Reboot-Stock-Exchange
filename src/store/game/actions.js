@@ -35,9 +35,7 @@ export async function initGameData ({ commit }) {
     });
 
     const gameData = [];
-    // for (let i = 0; i <= 3; i++) {
-    // range for the below for loop is for only one testing stock data
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i <= 3; i++) {
         gameData.push(helpers.trimObj(response1.data.data[i]));
     };
 
