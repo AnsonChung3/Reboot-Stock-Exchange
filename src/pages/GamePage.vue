@@ -1,24 +1,49 @@
 <template>
     <div>
         <h1>Game.vue</h1>
-        <h2>Market</h2>
-        <div v-for="stock in market" :key="stock.symbol">
-            <display-buy :stock=stock></display-buy>
+        <div class="tabsToggleBar row">
+            <div class="tabsBarNegative col"></div>
+            <div class="tabsBar col-7">
+                <q-tabs
+                    v-model="tab"
+                    dense
+                    align="justify"
+                    narrow-indicator
+                >
+                    <q-tab name="market" label="Market" />
+                    <q-tab name="portfolio" label="Portfolio" />
+                </q-tabs>
+            </div>
+            <div class="tabsBarNegative col"></div>
+            <div class="tabAcValue col">
+                <div>Current Fund</div>
+                <div>{{ displayFunding }}</div>
+            </div>
         </div>
+        <div v-show="tab !== ''">
+            <q-tab-panels v-model="tab" keep-alive>
+                <q-tab-panel class="stockPanelDisplay" name="portfolio">
+                    <h3>Holdings</h3>
+                    <div v-for="(holding, i) in holdings" :key="i">
+                        <display-sell :holding=holding></display-sell>
+                    </div>
+                </q-tab-panel>
+                <q-tab-panel class="stockPanelDisplay" name="market">
+                    <div v-for="stock in market" :key="stock.symbol">
+                        <display-buy :stock=stock></display-buy>
+                    </div>
+                </q-tab-panel>
+            </q-tab-panels>
+        </div>
+        <h2>Market</h2>
         <q-btn
             label='next day'
             @click="incre"
             outline
         />
         <h2>Account</h2>
-        <h3>Current Fund</h3>
-        <div>{{ displayFunding }}</div>
         <h3>Total value of holdings</h3>
         <div>{{ valueofHolding/100 }}</div>
-        <h3>Holdings</h3>
-        <div v-for="(holding, i) in holdings" :key="i">
-            <display-sell :holding=holding></display-sell>
-        </div>
     </div>
 </template>
 
@@ -31,6 +56,11 @@ export default {
     components: {
         DisplaySell,
         DisplayBuy
+    },
+    data () {
+        return {
+            tab: ''
+        }
     },
     watch: {
         gameCycle (newValue, oldValue) {
