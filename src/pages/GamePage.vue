@@ -13,7 +13,7 @@
         <h2>Account</h2>
         <h3>Current Fund</h3>
         <div>{{ displayFunding }}</div>
-        <h3>Total value of fund and holdings</h3>
+        <h3>Total value of holdings</h3>
         <div>{{ valueofHolding/100 }}</div>
         <h3>Holdings</h3>
         <div v-for="(holding, i) in holdings" :key="i">
