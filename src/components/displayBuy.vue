@@ -14,9 +14,9 @@
             label="buy"
             @click="buy"
             outline
-            :disabled="!sufficientFund"
         />
         <hr>
+                :disabled="!allowTrade"
     </div>
 </template>
 
@@ -37,8 +37,8 @@ export default {
         funding () {
             return this.$store.state.game.playerAccount.funding;
         },
-        sufficientFund () {
-            return this.tradeQty !== undefined && this.funding >= (this.tradeQty * this.stock.prices[this.currentCycle]);
+        allowTrade () {
+            return this.tradeQty !== undefined && this.tradeQty > 0 && this.funding >= (this.tradeQty * this.stock.prices[this.currentCycle]);
         },
         tradeAmt () {
             return this.tradeQty === undefined ? 0 : (this.tradeQty * this.stock.prices[this.currentCycle]);
@@ -49,10 +49,6 @@ export default {
     },
     methods: {
         buy () {
-            if (this.tradeQty <= 0 || this.tradeQty === undefined) {
-                alert("Please input value greater than zero");
-                return;
-            }
             this.$store.dispatch('game/trade', {
                 name: this.stock.name,
                 symbol: this.stock.symbol,
