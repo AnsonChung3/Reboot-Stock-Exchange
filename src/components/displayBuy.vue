@@ -5,10 +5,9 @@
         <div>Prices: {{ currentPrice/100 }}</div>
         <div class=row>
             <q-input
-                class="col-4"
+                class="col-5"
                 v-model="tradeQty"
                 type="number"
-                min=0
                 placeholder="Trade Quantity"
                 dark
             />
