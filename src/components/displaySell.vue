@@ -5,27 +5,37 @@
         <div>Holding quantity: {{ holding.quantity }}</div>
         <div>Current Price: {{ currentPrice/100 }}</div>
         <div>Current Hold Value: {{ holdValue/100 }}</div>
-        <q-input
-            v-model="tradeQty"
-            type="number"
-            min=0
-            placeholder="Trade Quantity"
-            dark
-        />
-        <q-btn
-            label="sell"
-            @click="sell"
-            outline
-            :disabled="!enableSell"
-        />
-        <hr>
+        <div class=row>
+            <q-input
+                class="col-5"
+                v-model="tradeQty"
+                type="number"
+                placeholder="Trade Quantity"
+                dark
+            />
+            <trade-btn
+                class="col"
+                labelTxt="sell"
+                :disableCondition="!enableSell"
+                @click=buy
+            />
+            <trade-btn
+                class="col"
+                labelTxt="sell all"
+            />
+        </div>
     </div>
 </template>
 
 <script>
+import TradeBtn from './tradeBtn.vue';
+
 export default {
     props: {
         holding: Object
+    },
+    components: {
+        TradeBtn
     },
     data () {
         return {
