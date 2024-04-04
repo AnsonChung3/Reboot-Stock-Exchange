@@ -1,9 +1,9 @@
 <template>
     <div>
         <h1>Game.vue</h1>
-        <div class="tabsToggleBar row">
-            <div class="tabsBarNegative col"></div>
-            <div class="tabsBar col-7">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-7">
                 <q-tabs
                     v-model="tab"
                     dense
@@ -14,18 +14,18 @@
                     <q-tab name="portfolio" label="Portfolio" />
                 </q-tabs>
             </div>
-            <div class="tabsBarNegative col"></div>
-            <div class="tabAcValue col">
+            <div class="col"></div>
+            <div class="col">
                 <div>Current Fund</div>
                 <div>{{ displayFunding }}</div>
             </div>
         </div>
         <div v-show="tab !== ''">
             <q-tab-panels v-model="tab" keep-alive dark>
-                <q-tab-panel class="stockPanelDisplay" name="portfolio">
+                <q-tab-panel name="portfolio">
                     <display-portfolio></display-portfolio>
                 </q-tab-panel>
-                <q-tab-panel class="stockPanelDisplay" name="market">
+                <q-tab-panel name="market">
                     <display-market></display-market>
                 </q-tab-panel>
             </q-tab-panels>
