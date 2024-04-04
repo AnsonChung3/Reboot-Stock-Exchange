@@ -59,7 +59,7 @@ export async function initGameData ({ commit }) {
 
     Promise.all(promises).then(() => {
             localStorage.setItem('game_data', JSON.stringify(gameData));
-            commit('initGameMarket', { gameData });
+            commit('initGameMarket', { data: gameData });
         }
     )
 }
