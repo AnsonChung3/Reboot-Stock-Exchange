@@ -12,29 +12,30 @@
                 placeholder="Trade Quantity"
                 dark
             />
-            <q-btn
+            <trade-btn
                 class="col"
-                label="buy"
-                @click="buy"
-                outline
-                :disabled="!allowTrade"
-                style="margin: 5%"
+                labelTxt="buy"
+                :disableCondition="!allowTrade"
+                @click=buy
             />
-            <q-btn
+            <trade-btn
                 class="col"
-                label="buy max"
-                outline
-                :disabled="!allowTrade"
-                style="margin: 5%"
+                labelTxt="buy max"
+                @click=test
             />
         </div>
     </div>
 </template>
 
 <script>
+import TradeBtn from './tradeBtn.vue';
+
 export default {
     props: {
         stock: Object
+    },
+    components: {
+        TradeBtn
     },
     data () {
         return {
@@ -59,6 +60,9 @@ export default {
         }
     },
     methods: {
+        test () {
+            console.log('test');
+        },
         buy () {
             this.$store.dispatch('game/trade', {
                 name: this.stock.name,
