@@ -1,40 +1,50 @@
 <template>
     <div>
         <h1>Game.vue</h1>
-        <div class="row">
-            <div class="col"></div>
-            <div class="col-7">
-                <q-tabs
-                    v-model="tab"
-                    dense
-                    align="justify"
-                    narrow-indicator
-                >
-                    <q-tab name="market" label="Market" />
-                    <q-tab name="portfolio" label="Portfolio" />
-                </q-tabs>
+        <div v-if="tab === ''">
+            <h2>Welcome to Game</h2>
+            <q-btn
+                label="press to start"
+                @click="tab = 'market'"
+                outline
+            />
+        </div>
+        <div v-else>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-7">
+                    <q-tabs
+                        v-model="tab"
+                        dense
+                        align="justify"
+                        narrow-indicator
+                    >
+                        <q-tab name="market" label="Market" />
+                        <q-tab name="portfolio" label="Portfolio" />
+                    </q-tabs>
+                </div>
+                <div class="col"></div>
+                <div class="col">
+                    <div>Current Fund</div>
+                    <div>{{ displayFunding }}</div>
+                </div>
             </div>
-            <div class="col"></div>
-            <div class="col">
-                <div>Current Fund</div>
-                <div>{{ displayFunding }}</div>
+            <div>
+                <q-tab-panels v-model="tab" keep-alive dark>
+                    <q-tab-panel name="portfolio">
+                        <display-portfolio></display-portfolio>
+                    </q-tab-panel>
+                    <q-tab-panel name="market">
+                        <display-market></display-market>
+                    </q-tab-panel>
+                </q-tab-panels>
+                <q-btn
+                    label='next day'
+                    @click="nextDay"
+                    outline
+                />
             </div>
         </div>
-        <div v-show="tab !== ''">
-            <q-tab-panels v-model="tab" keep-alive dark>
-                <q-tab-panel name="portfolio">
-                    <display-portfolio></display-portfolio>
-                </q-tab-panel>
-                <q-tab-panel name="market">
-                    <display-market></display-market>
-                </q-tab-panel>
-            </q-tab-panels>
-        </div>
-        <q-btn
-            label='next day'
-            @click="nextDay"
-            outline
-        />
     </div>
 </template>
 
