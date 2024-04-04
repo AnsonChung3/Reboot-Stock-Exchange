@@ -17,6 +17,13 @@
         />
         <hr>
                 :disabled="!allowTrade"
+            <q-btn
+                class="col"
+                label="buy max"
+                outline
+                :disabled="!allowTrade"
+                style="margin: 5%"
+            />
     </div>
 </template>
 
