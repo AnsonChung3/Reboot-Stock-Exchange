@@ -19,6 +19,10 @@ export function mutateFunding (state, payload) {
     console.log(state.playerAccount.funding);
 }
 
+export function nextDay (state) {
+    state.gameCycle += 1;
+}
+
 export function initGameMarket (state, payload) {
     // magic number 100 because default data coming back from API is 100 trade days
     const MAX = 100 - state.lastPlayableCycle + 1;

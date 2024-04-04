@@ -32,7 +32,7 @@
         </div>
         <q-btn
             label='next day'
-            @click="incre"
+            @click="nextDay"
             outline
         />
     </div>
@@ -90,8 +90,8 @@ export default {
         }
     },
     methods: {
-        incre () {
-            this.$store.state.game.gameCycle += 1;
+        nextDay () {
+            this.$store.commit('game/nextDay');
         }
     },
     created () {
