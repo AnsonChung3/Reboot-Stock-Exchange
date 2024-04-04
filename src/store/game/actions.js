@@ -10,16 +10,13 @@ export function trade ({ state, commit }, payload) {
     payload.index = index;
     // this is buying logic
     if (payload.quantity > 0 && index < 0) {
-        console.log('create new holding');
         payload.case = 'CREATE';
         delete payload.tradeAmt;
         commit('mutateHoldings', payload)
     } else if (-payload.quantity === state.playerAccount.holdings[index].quantity) {
-        console.log('sell all');
         payload.case = 'REMOVE';
         commit('mutateHoldings', payload);
     } else {
-        console.log('trade');
         payload.case = 'TRADE';
         commit('mutateHoldings', payload)
     }

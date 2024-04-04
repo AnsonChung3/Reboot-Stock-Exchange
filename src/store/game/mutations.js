@@ -6,7 +6,6 @@ export function mutateHoldings (state, payload) {
             break;
         case 'REMOVE':
             state.playerAccount.holdings.splice([payload.index], 1);
-            console.log(state.playerAccount.holdings);
             break;
         case 'TRADE':
             state.playerAccount.holdings[payload.index].quantity += payload.quantity;
@@ -16,7 +15,6 @@ export function mutateHoldings (state, payload) {
 
 export function mutateFunding (state, payload) {
     state.playerAccount.funding += payload;
-    console.log(state.playerAccount.funding);
 }
 
 export function nextDay (state) {
