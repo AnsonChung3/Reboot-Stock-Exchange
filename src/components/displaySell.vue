@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h4>Name: {{ holding.name }}</h4>
+    <div class="display-sell">
+        <div class="stock-name">{{ holding.name }}</div>
         <div>Symbol: {{ holding.symbol }}</div>
         <div>Holding quantity: {{ holding.quantity }}</div>
         <div>Current Price: {{ currentPrice/100 }}</div>
@@ -71,3 +71,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.display-sell {
+    padding: 5%
+}
+.stock-name{
+    font-size: 200%
+}
+</style>
