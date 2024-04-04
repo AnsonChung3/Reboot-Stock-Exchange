@@ -4,6 +4,7 @@
         <div>Symbol: {{ holding.symbol }}</div>
         <div>Holding quantity: {{ holding.quantity }}</div>
         <div>Current Price: {{ currentPrice/100 }}</div>
+        <div>Current Hold Value: {{ holdValue/100 }}</div>
         <q-input
             v-model="tradeQty"
             type="number"
@@ -44,6 +45,9 @@ export default {
         },
         enableSell () {
             return this.tradeQty > 0 && this.tradeQty <= this.holding.quantity;
+        },
+        holdValue () {
+            return this.holding.quantity * this.currentPrice;
         }
     },
     methods: {
