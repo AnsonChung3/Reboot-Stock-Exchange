@@ -1,11 +1,8 @@
 <template>
     <div>
-        <div>trade amt is {{ tradeAmt }}</div>
         <div>Name: {{ stock.name }}</div>
         <div>Symbol: {{ stock.symbol }}</div>
         <div>Prices: {{ currentPrice/100 }}</div>
-        <div>Current Cycle: {{ currentCycle }}</div>
-        <div><br>All Prices:<br>{{ stock.prices }}<br></div>
         <q-input
             v-model="tradeQty"
             type="number"
