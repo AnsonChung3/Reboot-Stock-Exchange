@@ -21,7 +21,7 @@
             </div>
         </div>
         <div v-show="tab !== ''">
-            <q-tab-panels v-model="tab" keep-alive>
+            <q-tab-panels v-model="tab" keep-alive dark>
                 <q-tab-panel class="stockPanelDisplay" name="portfolio">
                     <display-portfolio></display-portfolio>
                 </q-tab-panel>
