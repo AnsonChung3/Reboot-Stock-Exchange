@@ -23,39 +23,30 @@
         <div v-show="tab !== ''">
             <q-tab-panels v-model="tab" keep-alive>
                 <q-tab-panel class="stockPanelDisplay" name="portfolio">
-                    <h3>Holdings</h3>
-                    <div v-for="(holding, i) in holdings" :key="i">
-                        <display-sell :holding=holding></display-sell>
-                    </div>
+                    <display-portfolio></display-portfolio>
                 </q-tab-panel>
                 <q-tab-panel class="stockPanelDisplay" name="market">
-                    <div v-for="stock in market" :key="stock.symbol">
-                        <display-buy :stock=stock></display-buy>
-                    </div>
+                    <display-market></display-market>
                 </q-tab-panel>
             </q-tab-panels>
         </div>
-        <h2>Market</h2>
         <q-btn
             label='next day'
             @click="incre"
             outline
         />
-        <h2>Account</h2>
-        <h3>Total value of holdings</h3>
-        <div>{{ valueofHolding/100 }}</div>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import DisplayBuy from 'components/displayBuy.vue';
-import DisplaySell from 'components/displaySell.vue';
+import DisplayMarket from 'components/displayMarket.vue';
+import DisplayPortfolio from 'components/displayPortfolio.vue';
 
 export default {
     components: {
-        DisplaySell,
-        DisplayBuy
+        DisplayMarket,
+        DisplayPortfolio
     },
     data () {
         return {
