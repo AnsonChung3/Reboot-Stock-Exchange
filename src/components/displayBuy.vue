@@ -1,22 +1,25 @@
 <template>
-    <div>
-        <div>Name: {{ stock.name }}</div>
+    <div class="display-buy">
+        <div class="stock-name">{{ stock.name }}</div>
         <div>Symbol: {{ stock.symbol }}</div>
         <div>Prices: {{ currentPrice/100 }}</div>
-        <q-input
-            v-model="tradeQty"
-            type="number"
-            min=0
-            placeholder="Trade Quantity"
-            dark
-        />
-        <q-btn
-            label="buy"
-            @click="buy"
-            outline
-        />
-        <hr>
+        <div class=row>
+            <q-input
+                class="col-4"
+                v-model="tradeQty"
+                type="number"
+                min=0
+                placeholder="Trade Quantity"
+                dark
+            />
+            <q-btn
+                class="col"
+                label="buy"
+                @click="buy"
+                outline
                 :disabled="!allowTrade"
+                style="margin: 5%"
+            />
             <q-btn
                 class="col"
                 label="buy max"
@@ -24,6 +27,7 @@
                 :disabled="!allowTrade"
                 style="margin: 5%"
             />
+        </div>
     </div>
 </template>
 
@@ -66,3 +70,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.display-buy {
+    padding: 5%
+}
+.stock-name{
+    font-size: 200%
+}
+</style>
