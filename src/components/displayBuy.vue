@@ -76,6 +76,7 @@ export default {
                 tradeAmt: -this.tradeAmt,
                 quantity: Number(this.tradeQty)
             });
+            this.tradeQty = undefined;
         }
     }
 }
