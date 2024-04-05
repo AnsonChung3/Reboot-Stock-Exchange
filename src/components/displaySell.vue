@@ -1,45 +1,52 @@
 <template>
-    <div class="display-sell">
-        <div class="stock-name">{{ holding.name }}</div>
-        <div>Symbol: {{ holding.symbol }}</div>
-        <div>Holding quantity: {{ holding.quantity }}</div>
-        <div>Current Price: {{ currentPrice/100 }}</div>
-        <div>Current Hold Value: {{ holdValue/100 }}</div>
-        <div class=row>
-            <q-input
-                class="col-5"
-                v-model="tradeQty"
-                type="number"
-                placeholder="Trade Quantity"
-                dark
-            />
-            <trade-btn
-                class="col"
-                labelTxt="sell"
-                :disableCondition="!enableSell"
-                @click=buy
-            />
-            <trade-btn
-                class="col"
-                labelTxt="sell all"
-            />
+    <div>
+        <confirm-modal v-model="requestConfirm" @confirmTrade="sellAll"/>
+        <div class="display-sell">
+            <div class="stock-name">{{ holding.name }}</div>
+            <div>Symbol: {{ holding.symbol }}</div>
+            <div>Holding quantity: {{ holding.quantity }}</div>
+            <div>Current Price: {{ currentPrice/100 }}</div>
+            <div>Current Hold Value: {{ holdValue/100 }}</div>
+            <div class=row>
+                <q-input
+                    class="col-5"
+                    v-model="tradeQty"
+                    type="number"
+                    placeholder="Trade Quantity"
+                    dark
+                />
+                <trade-btn
+                    class="col"
+                    labelTxt="sell"
+                    :disableCondition="!enableSell"
+                    @click=buy
+                />
+                <trade-btn
+                    class="col"
+                    labelTxt="sell all"
+                    @click="requestConfirm = !requestConfirm"
+                />
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import TradeBtn from './tradeBtn.vue';
+import ConfirmModal from './confirmModal.vue';
 
 export default {
     props: {
         holding: Object
     },
     components: {
-        TradeBtn
+        TradeBtn,
+        ConfirmModal
     },
     data () {
         return {
-            tradeQty: undefined
+            tradeQty: undefined,
+            requestConfirm: false
         };
     },
     computed: {
@@ -61,6 +68,10 @@ export default {
         }
     },
     methods: {
+        sellAll () {
+            this.tradeQty = this.holding.quantity;
+            this.sell();
+        },
         sell () {
             this.$store.dispatch('game/trade', {
                 symbol: this.holding.symbol,
