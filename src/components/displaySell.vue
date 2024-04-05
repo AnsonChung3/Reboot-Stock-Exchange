@@ -19,7 +19,7 @@
                     class="col"
                     labelTxt="sell"
                     :disableCondition="!enableSell"
-                    @click=buy
+                    @click="sell"
                 />
                 <trade-btn
                     class="col"
