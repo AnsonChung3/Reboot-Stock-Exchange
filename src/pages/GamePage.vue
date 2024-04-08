@@ -9,6 +9,9 @@
                 outline
             />
         </div>
+        <div v-else-if="tab === 'endGameScreen'">
+            <div>I am end game screen</div>
+        </div>
         <div v-else>
             <div class="row">
                 <div class="col-7">
@@ -77,8 +80,8 @@ export default {
             if (newValue === this.lastPlayableCycle - 1) {
                 alert('the next cycle is the last playable');
             } else if (newValue === this.lastPlayableCycle) {
-                // trigger end game screen
                 alert('this is the end of game, showing end screen next');
+                this.tab = 'endGameScreen';
             }
         }
     },
