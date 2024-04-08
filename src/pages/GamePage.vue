@@ -11,7 +11,6 @@
         </div>
         <div v-else>
             <div class="row">
-                <div class="col"></div>
                 <div class="col-7">
                     <q-tabs
                         v-model="tab"
@@ -25,8 +24,18 @@
                 </div>
                 <div class="col"></div>
                 <div class="col">
+                    <div>Holdings</div>
+                    <div>{{ displayValHolding }}</div>
+                </div>
+                <div class="col">+</div>
+                <div class="col">
                     <div>Current Fund</div>
                     <div>{{ displayFunding }}</div>
+                </div>
+                <div class="col">=</div>
+                <div class="col">
+                    <div>Total Value</div>
+                    <div>{{ displayTotalValue }}</div>
                 </div>
             </div>
             <div>
@@ -80,13 +89,13 @@ export default {
             funding: state => state.game.playerAccount.funding,
             holdings: state => state.game.playerAccount.holdings
         }),
-        displayFunding () {
-            return (this.funding / 100).toFixed(2);
-        },
         currentCycle () {
             return this.$store.state.game.startCycle + this.$store.state.game.gameCycle;
         },
-        valueofHolding () {
+        displayFunding () {
+            return (this.funding / 100).toFixed(2);
+        },
+        displayValHolding () {
             let totalValue = 0;
             if (this.holdings.length === 0) {
                 return totalValue;
@@ -96,7 +105,10 @@ export default {
                 const price = stock.prices[this.currentCycle];
                 totalValue += (this.holdings[i].quantity * price);
             }
-            return totalValue;
+            return (totalValue / 100).toFixed(2);
+        },
+        displayTotalValue () {
+            return (Number(this.displayFunding) + Number(this.displayValHolding)).toFixed(2);
         }
     },
     methods: {
