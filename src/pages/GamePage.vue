@@ -1,5 +1,6 @@
 <template>
     <div>
+        <confirm-modal v-model="requestConfirm" @confirmTrade="confirmEndGame"></confirm-modal>
         <h1>Game.vue</h1>
         <div v-if="tab === ''">
             <h2>Welcome to Game</h2>
@@ -64,24 +65,28 @@
 import { mapState } from 'vuex';
 import DisplayMarket from 'components/displayMarket.vue';
 import DisplayPortfolio from 'components/displayPortfolio.vue';
+import ConfirmModal from 'components/confirmModal.vue';
 
 export default {
     components: {
         DisplayMarket,
-        DisplayPortfolio
+        DisplayPortfolio,
+        ConfirmModal
     },
     data () {
         return {
-            tab: ''
+            tab: '',
+            requestConfirm: false
         }
     },
     watch: {
-        gameCycle (newValue, oldValue) {
+        gameCycle (newValue) {
             if (newValue === this.lastPlayableCycle - 1) {
                 alert('the next cycle is the last playable');
             } else if (newValue === this.lastPlayableCycle) {
-                alert('this is the end of game, showing end screen next');
-                this.tab = 'endGameScreen';
+                // possibly change this to modal, with cancel/confirm
+                // alert('this is the end of game, showing end screen next');
+                this.requestConfirm = !this.requestConfirm;
             }
         }
     },
@@ -118,6 +123,9 @@ export default {
     methods: {
         nextDay () {
             this.$store.commit('game/nextDay');
+        },
+        confirmEndGame () {
+            this.tab = 'endGameScreen';
         }
     },
     created () {
