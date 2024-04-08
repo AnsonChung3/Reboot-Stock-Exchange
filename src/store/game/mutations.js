@@ -29,3 +29,13 @@ export function initGameMarket (state, payload) {
         state.marketData.push(payload.data[i]);
     }
 }
+
+export function resetGame (state) {
+    const MAX = 100 - state.lastPlayableCycle + 1;
+    state.startCycle = Math.floor(Math.random() * (MAX + 1));
+    state.gameCycle = 0;
+    state.playerAccount = {
+        funding: 100000 * 100,
+        holdings: []
+    };
+}

@@ -12,6 +12,11 @@
         </div>
         <div v-else-if="tab === 'endGameScreen'">
             <div>I am end game screen</div>
+            <q-btn
+                label="press to start"
+                @click="startNewgame"
+                outline
+            />
         </div>
         <div v-else>
             <div class="row">
@@ -126,6 +131,10 @@ export default {
         },
         confirmEndGame () {
             this.tab = 'endGameScreen';
+        },
+        startNewgame () {
+            this.$store.commit('game/resetGame');
+            this.tab = 'market';
         }
     },
     created () {
