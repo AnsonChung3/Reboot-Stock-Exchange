@@ -9,6 +9,6 @@ export default function () {
     },
     gameCycle: 0,
     startCycle: 0,
-    lastPlayableCycle: 5
+    lastPlayableCycle: 3
   }
 }
