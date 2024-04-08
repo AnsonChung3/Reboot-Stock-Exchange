@@ -49,7 +49,7 @@ export default {
     },
     computed: {
         currentCycle () {
-            return this.$store.state.game.startCycle + this.$store.state.game.gameCycle;
+            return this.$store.getters['game/getCurrentCycle'];
         },
         funding () {
             return this.$store.state.game.playerAccount.funding;

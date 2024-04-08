@@ -77,6 +77,7 @@ export default {
             if (newValue === this.lastPlayableCycle - 1) {
                 alert('the next cycle is the last playable');
             } else if (newValue === this.lastPlayableCycle) {
+                // trigger end game screen
                 alert('this is the end of game, showing end screen next');
             }
         }
@@ -90,7 +91,7 @@ export default {
             holdings: state => state.game.playerAccount.holdings
         }),
         currentCycle () {
-            return this.$store.state.game.startCycle + this.$store.state.game.gameCycle;
+            return this.$store.getters['game/getCurrentCycle'];
         },
         displayFunding () {
             return (this.funding / 100).toFixed(2);
