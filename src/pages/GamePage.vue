@@ -12,6 +12,10 @@
         </div>
         <div v-else-if="tab === 'endGameScreen'">
             <div>I am end game screen</div>
+            <div>Holdings value: {{ displayValHolding }}</div>
+            <div>Current Fund: {{ displayFunding }}</div>
+            <hr>
+            <div>Total Value: {{ displayTotalValue }}</div>
             <q-btn
                 label="press to start"
                 @click="startNewgame"
@@ -81,7 +85,8 @@ export default {
     data () {
         return {
             tab: '',
-            requestConfirm: false
+            requestConfirm: false,
+            endGameConfirm: false
         }
     },
     watch: {
@@ -127,14 +132,21 @@ export default {
     },
     methods: {
         nextDay () {
-            this.$store.commit('game/nextDay');
+            if (this.gameCycle === this.lastPlayableCycle - 1) {
+                this.endGameConfirm ? this.$store.commit('game/nextDay') : this.requestConfirm = true;
+            } else if (this.gameCycle < this.lastPlayableCycle) {
+                this.$store.commit('game/nextDay');
+            }
         },
         confirmEndGame () {
             this.tab = 'endGameScreen';
+            this.endGameConfirm = true;
+            this.nextDay();
         },
         startNewgame () {
             this.$store.commit('game/resetGame');
             this.tab = 'market';
+            this.endGameConfirm = false;
         }
     },
     created () {
