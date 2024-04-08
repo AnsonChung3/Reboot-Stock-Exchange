@@ -14,7 +14,7 @@
 export default {
     methods: {
         emitConfirm () {
-            this.$emit('confirmTrade');
+            this.$emit('confirmed');
         }
     }
 }

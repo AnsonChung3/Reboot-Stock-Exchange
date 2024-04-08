@@ -1,6 +1,6 @@
 <template>
     <div>
-        <confirm-modal v-model="requestConfirm" @confirmTrade="buyMax"/>
+        <confirm-modal v-model="requestConfirm" @confirmed="buyMax"/>
         <div class="display-buy">
             <div class="stock-name">{{ stock.name }}</div>
             <div>Symbol: {{ stock.symbol }}</div>

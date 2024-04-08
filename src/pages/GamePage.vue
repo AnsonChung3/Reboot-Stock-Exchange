@@ -1,6 +1,6 @@
 <template>
     <div>
-        <confirm-modal v-model="requestConfirm" @confirmTrade="confirmEndGame"></confirm-modal>
+        <confirm-modal v-model="requestConfirm" @confirmed="confirmEndGame"></confirm-modal>
         <h1>Game.vue</h1>
         <div v-if="tab === ''">
             <h2>Welcome to Game</h2>
