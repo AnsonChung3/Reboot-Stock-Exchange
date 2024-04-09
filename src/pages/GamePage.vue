@@ -14,16 +14,7 @@
             <display-tutorial @startGame="startNewgame" />
         </div>
         <div v-else-if="tab === 'endGameScreen'">
-            <div>I am end game screen</div>
-            <div>Holdings value: {{ displayValHolding }}</div>
-            <div>Current Fund: {{ displayFunding }}</div>
-            <hr>
-            <div>Total Value: {{ displayTotalValue }}</div>
-            <q-btn
-                label="press to start"
-                @click="startNewgame"
-                outline
-            />
+            <display-end-game @restart="startNewgame"/>
         </div>
         <div v-else>
             <div class="row">
@@ -79,13 +70,15 @@ import DisplayMarket from 'components/displayMarket.vue';
 import DisplayPortfolio from 'components/displayPortfolio.vue';
 import ConfirmModal from 'components/confirmModal.vue';
 import DisplayTutorial from 'components/displayTutorial.vue';
+import DisplayEndGame from 'components/displayEndGame.vue';
 
 export default {
     components: {
         DisplayMarket,
         DisplayPortfolio,
         ConfirmModal,
-        DisplayTutorial
+        DisplayTutorial,
+        DisplayEndGame
     },
     data () {
         return {
@@ -112,28 +105,7 @@ export default {
             lastPlayableCycle: state => state.game.lastPlayableCycle,
             funding: state => state.game.playerAccount.funding,
             holdings: state => state.game.playerAccount.holdings
-        }),
-        currentCycle () {
-            return this.$store.getters['game/getCurrentCycle'];
-        },
-        displayFunding () {
-            return (this.funding / 100).toFixed(2);
-        },
-        displayValHolding () {
-            let totalValue = 0;
-            if (this.holdings.length === 0) {
-                return totalValue;
-            }
-            for (let i = 0; i < this.holdings.length; i++) {
-                const stock = this.market.find((stock) => stock.symbol === this.holdings[i].symbol);
-                const price = stock.prices[this.currentCycle];
-                totalValue += (this.holdings[i].quantity * price);
-            }
-            return (totalValue / 100).toFixed(2);
-        },
-        displayTotalValue () {
-            return (Number(this.displayFunding) + Number(this.displayValHolding)).toFixed(2);
-        }
+        })
     },
     methods: {
         nextDay () {
