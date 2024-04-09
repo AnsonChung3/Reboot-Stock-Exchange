@@ -6,9 +6,12 @@
             <h2>Welcome to Game</h2>
             <q-btn
                 label="press to start"
-                @click="tab = 'market'"
+                @click="tab = 'tutorialScreen'"
                 outline
             />
+        </div>
+        <div v-else-if="tab === 'tutorialScreen'">
+            <display-tutorial @startGame="startNewgame" />
         </div>
         <div v-else-if="tab === 'endGameScreen'">
             <div>I am end game screen</div>
@@ -75,12 +78,14 @@ import { mapState } from 'vuex';
 import DisplayMarket from 'components/displayMarket.vue';
 import DisplayPortfolio from 'components/displayPortfolio.vue';
 import ConfirmModal from 'components/confirmModal.vue';
+import DisplayTutorial from 'components/displayTutorial.vue';
 
 export default {
     components: {
         DisplayMarket,
         DisplayPortfolio,
-        ConfirmModal
+        ConfirmModal,
+        DisplayTutorial
     },
     data () {
         return {
@@ -144,6 +149,7 @@ export default {
             this.nextDay();
         },
         startNewgame () {
+            console.log('start new game');
             this.$store.commit('game/resetGame');
             this.tab = 'market';
             this.endGameConfirm = false;
