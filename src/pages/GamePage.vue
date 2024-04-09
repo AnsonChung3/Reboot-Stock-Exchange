@@ -92,8 +92,6 @@ export default {
             if (newValue === this.lastPlayableCycle - 1) {
                 alert('the next cycle is the last playable');
             } else if (newValue === this.lastPlayableCycle) {
-                // possibly change this to modal, with cancel/confirm
-                // alert('this is the end of game, showing end screen next');
                 this.requestConfirm = !this.requestConfirm;
             }
         }
@@ -131,7 +129,6 @@ export default {
             this.nextDay();
         },
         startNewgame () {
-            console.log('start new game');
             this.$store.commit('game/resetGame');
             this.tab = 'market';
             this.endGameConfirm = false;
@@ -139,11 +136,8 @@ export default {
     },
     created () {
         if (localStorage.getItem('game_data') === null) {
-            // testing this one is bit expensive, use with caution
-            console.log('datad not found, call to init data');
             this.$store.dispatch('game/initGameData');
         } else {
-            console.log('game_data is in local storage');
             const data = JSON.parse(localStorage.getItem('game_data'));
             this.$store.commit('game/initGameMarket', { data });
         }
