@@ -16,35 +16,22 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
     computed: {
-        ...mapState({
-            market: state => state.game.marketData,
-            funding: state => state.game.playerAccount.funding,
-            holdings: state => state.game.playerAccount.holdings
-        }),
-        currentCycle () {
-            return this.$store.getters['game/getCurrentCycle'];
+        funding () {
+            return this.$store.state.game.playerAccount.funding;
         },
         displayFunding () {
             return (this.funding / 100).toFixed(2);
         },
         displayValHolding () {
-            let totalValue = 0;
-            if (this.holdings.length === 0) {
-                return totalValue;
-            }
-            for (let i = 0; i < this.holdings.length; i++) {
-                const stock = this.market.find((stock) => stock.symbol === this.holdings[i].symbol);
-                const price = stock.prices[this.currentCycle];
-                totalValue += (this.holdings[i].quantity * price);
-            }
-            return (totalValue / 100).toFixed(2);
+            // returns a string for display
+            const val = this.$store.getters['game/getTotalHoldingValue'];
+            return (val / 100).toFixed(2);
         },
         displayTotalValue () {
-            return (Number(this.displayFunding) + Number(this.displayValHolding)).toFixed(2);
+            const val = this.$store.getters['game/getTotalHoldingValue'] + this.funding;
+            return (val / 100).toFixed(2);
         }
     },
     methods: {

@@ -100,12 +100,22 @@ export default {
     },
     computed: {
         ...mapState({
-            market: state => state.game.marketData,
             gameCycle: state => state.game.gameCycle,
             lastPlayableCycle: state => state.game.lastPlayableCycle,
-            funding: state => state.game.playerAccount.funding,
-            holdings: state => state.game.playerAccount.holdings
-        })
+            funding: state => state.game.playerAccount.funding
+        }),
+        displayValHolding () {
+            // returns a string for display
+            const val = this.$store.getters['game/getTotalHoldingValue'];
+            return (val / 100).toFixed(2);
+        },
+        displayFunding () {
+            return (this.funding / 100).toFixed(2);
+        },
+        displayTotalValue () {
+            const val = this.$store.getters['game/getTotalHoldingValue'] + this.funding;
+            return (val / 100).toFixed(2);
+        }
     },
     methods: {
         nextDay () {
