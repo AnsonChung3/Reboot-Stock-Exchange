@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Welcome To game!</h2>
+        <h2>Introduction</h2>
         <div>
             <p>You will be shown price pulled from external API with rael market data.</p>
             <p>The goal is to get as much profit as possible within 14 trade days.</p>

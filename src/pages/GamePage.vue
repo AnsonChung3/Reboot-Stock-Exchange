@@ -1,11 +1,11 @@
 <template>
     <div>
         <confirm-modal v-model="requestConfirm" @confirmed="confirmEndGame"></confirm-modal>
-        <h1>Game.vue</h1>
+        <h1>Stock Exchange Game</h1>
         <div v-if="tab === ''">
-            <h2>Welcome to Game</h2>
+            <h2>Welcome!</h2>
             <q-btn
-                label="press to start"
+                label="click me"
                 @click="tab = 'tutorialScreen'"
                 outline
             />

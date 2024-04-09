@@ -5,7 +5,7 @@
             <div>Holdings value: {{ displayValHolding }}</div>
             <hr>
             <div>Total Value: {{ displayTotalValue }}</div>
-            <div>Your starting fund was 100,000</div>
+            <div>Your starting fund was 100000.00</div>
             <div>You have earned/lost [ this much money ]</div>
             <q-btn
                 label="press to start"
