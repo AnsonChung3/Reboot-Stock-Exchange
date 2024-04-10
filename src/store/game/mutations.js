@@ -1,3 +1,5 @@
+import { getStartCycle } from './getters.js';
+
 export function mutateHoldings (state, payload) {
     switch (payload.case) {
         case 'CREATE':
@@ -22,17 +24,14 @@ export function nextDay (state) {
 }
 
 export function initGameMarket (state, payload) {
-    // magic number 100 because default data coming back from API is 100 trade days
-    const MAX = 100 - state.lastPlayableCycle + 1;
-    state.startCycle = Math.floor(Math.random() * (MAX + 1));
+    state.startCycle = getStartCycle;
     for (let i = 0; i < payload.data.length; i++) {
         state.marketData.push(payload.data[i]);
     }
 }
 
 export function resetGame (state) {
-    const MAX = 100 - state.lastPlayableCycle + 1;
-    state.startCycle = Math.floor(Math.random() * (MAX + 1));
+    state.startCycle = getStartCycle;
     state.gameCycle = 0;
     state.playerAccount = {
         funding: 100000 * 100,

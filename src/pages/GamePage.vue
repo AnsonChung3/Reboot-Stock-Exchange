@@ -6,12 +6,12 @@
             <h2>Welcome!</h2>
             <q-btn
                 label="click me"
-                @click="tab = 'tutorialScreen'"
+                @click="tab = 'introScreen'"
                 outline
             />
         </div>
-        <div v-else-if="tab === 'tutorialScreen'">
-            <display-tutorial @startGame="startNewgame" />
+        <div v-else-if="tab === 'introScreen'">
+            <display-intro @startGame="startNewgame" />
         </div>
         <div v-else-if="tab === 'endGameScreen'">
             <display-end-game @restart="startNewgame"/>
@@ -66,19 +66,19 @@
 
 <script>
 import { mapState } from 'vuex';
+import ConfirmModal from 'components/confirmModal.vue';
+import DisplayIntro from 'components/displayIntro.vue';
+import DisplayEndGame from 'components/displayEndGame.vue';
 import DisplayMarket from 'components/displayMarket.vue';
 import DisplayPortfolio from 'components/displayPortfolio.vue';
-import ConfirmModal from 'components/confirmModal.vue';
-import DisplayTutorial from 'components/displayTutorial.vue';
-import DisplayEndGame from 'components/displayEndGame.vue';
 
 export default {
     components: {
-        DisplayMarket,
-        DisplayPortfolio,
         ConfirmModal,
-        DisplayTutorial,
-        DisplayEndGame
+        DisplayIntro,
+        DisplayEndGame,
+        DisplayMarket,
+        DisplayPortfolio
     },
     data () {
         return {
@@ -102,8 +102,8 @@ export default {
             lastPlayableCycle: state => state.game.lastPlayableCycle,
             funding: state => state.game.playerAccount.funding
         }),
+        // all 3 properties blow returns a string
         displayValHolding () {
-            // returns a string for display
             const val = this.$store.getters['game/getTotalHoldingValue'];
             return (val / 100).toFixed(2);
         },
@@ -130,8 +130,8 @@ export default {
         },
         startNewgame () {
             this.$store.commit('game/resetGame');
-            this.tab = 'market';
             this.endGameConfirm = false;
+            this.tab = 'market';
         }
     },
     created () {

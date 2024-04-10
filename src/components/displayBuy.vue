@@ -1,10 +1,10 @@
 <template>
     <div>
         <confirm-modal v-model="requestConfirm" @confirmed="buyMax"/>
-        <div class="display-buy">
-            <div class="stock-name">{{ stock.name }}</div>
+        <div class="display-buy" style="paddind: 5%">
+            <div class="stock-name" style="font-size: 200%">{{ stock.name }}</div>
             <div>Symbol: {{ stock.symbol }}</div>
-            <div>Prices: {{ currentPrice/100 }}</div>
+            <div>Prices: {{ displayPrice }}</div>
             <div class=row>
                 <q-input
                     class="col-5"
@@ -17,7 +17,7 @@
                     class="col"
                     labelTxt="buy"
                     :disableCondition="!allowTrade"
-                    @click=buy
+                    @click="buy"
                 />
                 <trade-btn
                     class="col"
@@ -48,20 +48,23 @@ export default {
         };
     },
     computed: {
-        currentCycle () {
-            return this.$store.getters['game/getCurrentCycle'];
-        },
-        funding () {
-            return this.$store.state.game.playerAccount.funding;
-        },
         allowTrade () {
             return this.tradeQty !== undefined && this.tradeQty > 0 && this.funding >= (this.tradeQty * this.stock.prices[this.currentCycle]);
         },
         tradeAmt () {
             return this.tradeQty === undefined ? 0 : (this.tradeQty * this.stock.prices[this.currentCycle]);
         },
+        funding () {
+            return this.$store.state.game.playerAccount.funding;
+        },
+        currentCycle () {
+            return this.$store.getters['game/getCurrentCycle'];
+        },
         currentPrice () {
             return this.stock.prices[this.currentCycle];
+        },
+        displayPrice () {
+            return (this.currentPrice / 100).toFixed(2);
         }
     },
     methods: {
@@ -81,12 +84,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.display-buy {
-    padding: 5%
-}
-.stock-name{
-    font-size: 200%
-}
-</style>

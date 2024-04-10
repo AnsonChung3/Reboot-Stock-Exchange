@@ -18,3 +18,9 @@ export function getTotalHoldingValue (state) {
 export function getCurrentCycle (state) {
     return state.startCycle + state.gameCycle;
 }
+
+export function getStartCycle (state) {
+    // magic number 100 because default data coming back from API is 100 trade days
+    const MAX = 100 - state.lastPlayableCycle + 1;
+    return Math.floor(Math.random() * (MAX + 1));
+}

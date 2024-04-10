@@ -3,17 +3,16 @@ import { APIKEY } from 'components/APIKEY.js';
 import * as helpers from 'components/helpers.js';
 
 export function trade ({ state, commit }, payload) {
-    // change funding in state
     commit('mutateFunding', payload.tradeAmt);
 
     const index = state.playerAccount.holdings.findIndex(stock => stock.symbol === payload.symbol);
     payload.index = index;
-    // this is buying logic
+
     if (payload.quantity > 0 && index < 0) {
         payload.case = 'CREATE';
         delete payload.tradeAmt;
         commit('mutateHoldings', payload)
-    } else if (-payload.quantity === state.playerAccount.holdings[index].quantity) {
+    } else if (Math.abs(payload.quantity) === state.playerAccount.holdings[index].quantity) {
         payload.case = 'REMOVE';
         commit('mutateHoldings', payload);
     } else {

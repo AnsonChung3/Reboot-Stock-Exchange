@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row" v-for="(row, index) in rowedMarket" :key="index">
-            <div class="col" v-for="(stock, i) in row" :key="i">
+            <div class="col" v-for="stock in row" :key="stock.symbol">
                 <display-buy :stock=stock></display-buy>
             </div>
         </div>
