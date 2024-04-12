@@ -133,7 +133,7 @@ export default {
         },
         startNewgame () {
             console.log('start new game');
-            this.$store.commit('game/setStartCycle', this.$store.getters['game/getStartCycle']);
+            this.$store.commit('game/setStartCycle');
             this.$store.commit('game/resetGame');
             this.endGameConfirm = false;
             this.showMarket();

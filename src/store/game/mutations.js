@@ -24,7 +24,6 @@ export function nextDay (state) {
 }
 
 export function initGameMarket (state, payload) {
-    // state.startCycle = getStartCycle;
     for (let i = 0; i < payload.data.length; i++) {
         state.marketData.push(payload.data[i]);
     }
