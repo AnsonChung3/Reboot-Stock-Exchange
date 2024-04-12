@@ -21,7 +21,13 @@ export function trade ({ state, commit }, payload) {
     }
 }
 
+export function resetGame ({ commit }) {
+    commit('setStartCycle');
+    commit('resetGame');
+}
+
 export async function initGameData ({ commit }) {
+    commit('setStartCycle');
     // response 1 is the unhandled raw response
     const response1 = await axios.get('http://api.marketstack.com/v1/tickers',
     {
