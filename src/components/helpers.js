@@ -12,5 +12,5 @@ export function mapPrices (array) {
 
 export function getRandom (max) {
     // function returns a number excluding the max value
-    return Math.floor(Math.random() * (max + 1));
+    return Math.floor(Math.random() * max);
 }
