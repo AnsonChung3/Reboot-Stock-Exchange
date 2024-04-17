@@ -19,17 +19,17 @@ export default {
         holdings () {
             return this.$store.state.game.playerAccount.holdings;
         },
-        rowedHoldings() {
+        rowedHoldings () {
             const rowedHoldings = [];
             for (let i = 0; i < this.holdings.length; i += 2) {
                 const pair = [this.holdings[i]];
                 if (i + 1 < this.holdings.length) {
-                   pair.push(this.holdings[i + 1]);
+                    pair.push(this.holdings[i + 1]);
                 }
                 rowedHoldings.push(pair);
             }
             return rowedHoldings;
         }
     }
-}
+};
 </script>

@@ -50,7 +50,7 @@ export default {
             this.$emit('restart');
         }
     }
-}
+};
 </script>
 
 <style scoped>

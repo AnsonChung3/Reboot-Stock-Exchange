@@ -17,5 +17,5 @@ export default {
             this.$emit('confirmed');
         }
     }
-}
+};
 </script>

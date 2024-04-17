@@ -85,7 +85,7 @@ export default {
             tab: '',
             requestConfirm: false,
             endGameConfirm: false
-        }
+        };
     },
     watch: {
         gameCycle (newValue) {
@@ -150,5 +150,5 @@ export default {
             // this.$store.dispatch('game/resetGame');
         }
     }
-}
+};
 </script>

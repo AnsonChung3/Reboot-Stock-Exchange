@@ -82,5 +82,5 @@ export default {
             this.tradeQty = undefined;
         }
     }
-}
+};
 </script>

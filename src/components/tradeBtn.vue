@@ -13,5 +13,5 @@ export default {
         labelTxt: String,
         disableCondition: Boolean
     }
-}
+};
 </script>

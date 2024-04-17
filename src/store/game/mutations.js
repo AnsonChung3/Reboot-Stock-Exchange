@@ -2,16 +2,16 @@ import { getRandom } from 'components/helpers.js';
 
 export function mutateHoldings (state, payload) {
     switch (payload.case) {
-        case 'CREATE':
-            delete payload.case;
-            state.playerAccount.holdings.push(payload);
-            break;
-        case 'REMOVE':
-            state.playerAccount.holdings.splice([payload.index], 1);
-            break;
-        case 'TRADE':
-            state.playerAccount.holdings[payload.index].quantity += payload.quantity;
-            break;
+    case 'CREATE':
+        delete payload.case;
+        state.playerAccount.holdings.push(payload);
+        break;
+    case 'REMOVE':
+        state.playerAccount.holdings.splice([payload.index], 1);
+        break;
+    case 'TRADE':
+        state.playerAccount.holdings[payload.index].quantity += payload.quantity;
+        break;
     }
 }
 

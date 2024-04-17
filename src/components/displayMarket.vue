@@ -19,7 +19,7 @@ export default {
         market () {
             return this.$store.state.game.marketData;
         },
-        rowedMarket() {
+        rowedMarket () {
             const rowedMarket = [];
             for (let i = 0; i < this.market.length; i += 2) {
                 rowedMarket.push([this.market[i], this.market[i + 1]]);
@@ -27,5 +27,5 @@ export default {
             return rowedMarket;
         }
     }
-}
+};
 </script>

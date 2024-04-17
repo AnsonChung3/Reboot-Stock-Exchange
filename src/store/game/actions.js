@@ -11,13 +11,13 @@ export function trade ({ state, commit }, payload) {
     if (payload.quantity > 0 && index < 0) {
         payload.case = 'CREATE';
         delete payload.tradeAmt;
-        commit('mutateHoldings', payload)
+        commit('mutateHoldings', payload);
     } else if (Math.abs(payload.quantity) === state.playerAccount.holdings[index].quantity) {
         payload.case = 'REMOVE';
         commit('mutateHoldings', payload);
     } else {
         payload.case = 'TRADE';
-        commit('mutateHoldings', payload)
+        commit('mutateHoldings', payload);
     }
 }
 
@@ -30,11 +30,11 @@ export async function initGameData ({ commit }) {
     commit('setStartCycle');
     // response 1 is the unhandled raw response
     const response1 = await axios.get('http://api.marketstack.com/v1/tickers',
-    {
-        params: {
-            access_key: APIKEY
-        }
-    });
+        {
+            params: {
+                access_key: APIKEY
+            }
+        });
 
     const gameData = [];
     // the upper limit for i need to change to a bigger data bank
@@ -45,25 +45,24 @@ export async function initGameData ({ commit }) {
     const promises = [];
     for (let i = 0; i < gameData.length; i++) {
         promises.push(axios.get('http://api.marketstack.com/v1/eod',
-                {
-                    params: {
-                        access_key: APIKEY,
-                        symbols: gameData[i].symbol
-                    }
+            {
+                params: {
+                    access_key: APIKEY,
+                    symbols: gameData[i].symbol
                 }
-            )
-                .then(response => {
-                    gameData[i].prices = helpers.mapPrices(response.data.data);
-                })
+            }
         )
+            .then(response => {
+                gameData[i].prices = helpers.mapPrices(response.data.data);
+            })
+        );
     }
 
     Promise.all(promises).then(() => {
-            localStorage.setItem('game_data', JSON.stringify(gameData));
-            // maybe need a new mutation
-            // save the gameData to the store
-            // it would be useful when resetting the game
-            commit('initGameMarket', { data: gameData });
-        }
-    )
+        localStorage.setItem('game_data', JSON.stringify(gameData));
+        // maybe need a new mutation
+        // save the gameData to the store
+        // it would be useful when resetting the game
+        commit('initGameMarket', { data: gameData });
+    });
 }
