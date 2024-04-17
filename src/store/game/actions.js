@@ -37,6 +37,7 @@ export async function initGameData ({ commit }) {
     });
 
     const gameData = [];
+    // the upper limit for i need to change to a bigger data bank
     for (let i = 0; i <= 3; i++) {
         gameData.push(helpers.trimObj(response1.data.data[i]));
     };
@@ -59,6 +60,9 @@ export async function initGameData ({ commit }) {
 
     Promise.all(promises).then(() => {
             localStorage.setItem('game_data', JSON.stringify(gameData));
+            // maybe need a new mutation
+            // save the gameData to the store
+            // it would be useful when resetting the game
             commit('initGameMarket', { data: gameData });
         }
     )

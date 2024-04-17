@@ -24,6 +24,13 @@ export function nextDay (state) {
 }
 
 export function initGameMarket (state, payload) {
+    // this may or maynot need renaming
+    // should add a helper function
+    // return an array of 4 random numbers
+    // state.marketData.push(localStorage.data[array])
+    // paylod into this mutation should contain all of the stocks
+    // but if I am pulling it from state, then i wouldn't need payload?
+    // worth checking if payload can be empty
     for (let i = 0; i < payload.data.length; i++) {
         state.marketData.push(payload.data[i]);
     }
