@@ -26,7 +26,7 @@ export function resetGame ({ commit }) {
     commit('resetGame');
 }
 
-export async function initGameData ({ commit }) {
+export async function initGameData ({ commit, state }) {
     commit('setStartCycle');
     // response 1 is the unhandled raw response
     const response1 = await axios.get('http://api.marketstack.com/v1/tickers',
@@ -38,7 +38,7 @@ export async function initGameData ({ commit }) {
 
     const gameData = [];
     // the upper limit for i need to change to a bigger data bank
-    for (let i = 0; i <= 3; i++) {
+    for (let i = 0; i < state.totalStockCount; i++) {
         gameData.push(helpers.trimObj(response1.data.data[i]));
     };
 
