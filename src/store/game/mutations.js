@@ -1,4 +1,4 @@
-import { getRandom } from 'components/helpers.js';
+import { getRandom, getArrayOfRandom } from 'components/helpers.js';
 
 export function mutateHoldings (state, payload) {
     switch (payload.case) {
@@ -31,8 +31,13 @@ export function initGameMarket (state, payload) {
     // paylod into this mutation should contain all of the stocks
     // but if I am pulling it from state, then i wouldn't need payload?
     // worth checking if payload can be empty
-    for (let i = 0; i < payload.data.length; i++) {
-        state.marketData.push(payload.data[i]);
+    const array = getArrayOfRandom(4, state.totalStockCount);
+    console.log(array)
+
+    // for (let i = 0; i < payload.data.length; i++) {
+    for (let i = 0; i < array.length; i++) {
+        const index = array[i];
+        state.marketData.push(payload.data[index]);
     }
 }
 
@@ -49,4 +54,5 @@ export function resetGame (state) {
         funding: 100000 * 100,
         holdings: []
     };
+    state.marketData = [];
 }

@@ -1,7 +1,8 @@
 export default function () {
     return {
-        // game design is request 8 stock prices from API and play with random 4 for each game
-        totalStockCount: 4,
+        // game design is request 10 stock prices from API
+        // and play with random 4 for each game
+        totalStockCount: 10,
         // data from API should be stored in localStorage
         // marketData should only contain prices for each game
         // so 4 stocks, at the time of developing this game

@@ -14,3 +14,15 @@ export function getRandom (max) {
     // function returns a number excluding the max value
     return Math.floor(Math.random() * max);
 }
+
+export function getArrayOfRandom (length, max) {
+    const array = [];
+    while (array.length < length) {
+        let rnd = getRandom(max);
+        while (array.includes(rnd)) {
+            rnd = getRandom(max);
+        }
+        array.push(rnd);
+    }
+    return array;
+}
