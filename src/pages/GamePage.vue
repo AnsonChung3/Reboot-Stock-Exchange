@@ -135,8 +135,13 @@ export default {
             console.log('start new game');
             this.$store.commit('game/setStartCycle');
             this.$store.commit('game/resetGame');
+            this.initMarketFromLocal();
             this.endGameConfirm = false;
             this.showMarket();
+        },
+        initMarketFromLocal () {
+            const data = JSON.parse(localStorage.getItem('game_data'));
+            this.$store.commit('game/initGameMarket', { data });
         }
     },
     created () {
@@ -145,9 +150,7 @@ export default {
         } else {
             console.log('created, else');
             this.$store.commit('game/setStartCycle', this.$store.getters['game/getStartCycle']);
-            const data = JSON.parse(localStorage.getItem('game_data'));
-            this.$store.commit('game/initGameMarket', { data });
-            // this.$store.dispatch('game/resetGame');
+            this.initMarketFromLocal()
         }
     }
 };
