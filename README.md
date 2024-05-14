@@ -14,20 +14,5 @@ npm install
 quasar dev
 ```
 
-
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js).
+### Limitations
+1. There are two stocks in particular are excluded from the game. One of them being Alphabet . It is sort of redudant to Alphabet - Class A. The other one being Meta something. No price data came back even when request was made correctly and came back with a 200 sucess status. As I am on the free plan, there was no technical support from the API side. To keep the game running, it's excluded from the game data.
