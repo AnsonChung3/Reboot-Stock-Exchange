@@ -1,5 +1,5 @@
 import { axios } from 'boot/axios.js';
-import { APIKEY } from 'components/APIKEY.js';
+// import { APIKEY } from 'components/APIKEY.js';
 import * as helpers from 'components/helpers.js';
 
 export function trade ({ state, commit }, payload) {
@@ -26,13 +26,13 @@ export function resetGame ({ commit }) {
     commit('resetGame');
 }
 
-export async function initGameData ({ commit, state }) {
+export async function initGameData ({ commit, state }, payload) {
     commit('setStartCycle');
     // response 1 is the unhandled raw response
     const response1 = await axios.get('http://api.marketstack.com/v1/tickers',
         {
             params: {
-                access_key: APIKEY
+                access_key: payload
             }
         });
 
@@ -47,7 +47,7 @@ export async function initGameData ({ commit, state }) {
         promises.push(axios.get('http://api.marketstack.com/v1/eod',
             {
                 params: {
-                    access_key: APIKEY,
+                    access_key: payload,
                     symbols: gameData[i].symbol
                 }
             }
