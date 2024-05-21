@@ -23,29 +23,30 @@
                 dark
             />
             <q-btn
-                label="next"
-                @click="addAPIKey"
-                outline
-            />
-        </div>
-        <div v-if="page === 1 && hasData">
-            <p>There are already data stored to your browser. You can start game with existing data or fetch new data.</p>
-            <p><b>Note: data from the API are end of day data. Fetching new data in the same day won't give you different results. Each initiation of data will cost 11 API requests.</b></p>
-            <q-btn
-                label="fetch new"
-                @click="hasData = !hasData"
-            />
-            <q-btn
-                label="Start trading"
-                @click="emitStart"
+                label="request data"
+                @click="addKeyReqData"
                 outline
             />
         </div>
         <div v-if="page === 2">
             <p>The game will fetch the price data for a total of 10 stocks.</p>
             <p>4 stocks will be randomly chosen for each game.</p>
-            <p>The returned data from the API will be stored in the local storage. You can see it under the "Application" tab if you go to your browser dev tools.</p>
+            <p>The returned data from the API will be stored in local storage. You can see it under the "Application" tab if you go to your browser dev tools.</p>
             <p>Time for a little game!</p>
+            <q-btn
+                label="Start trading"
+                @click="emitStart"
+                outline
+            />
+        </div>
+        <div v-if="page === 1 && hasData">
+            <p>There are already data stored to your browser. You can start game with existing data or fetch new data.</p>
+            <p><b>Note: data from the API are end of day data. Fetching new data in the same day won't give you different results as the list of 10 stocks is fixed. Each initiation of data will cost 11 API requests.</b></p>
+            <q-btn
+                label="fetch new"
+                @click="fetchNew"
+                outline
+            />
             <q-btn
                 label="Start trading"
                 @click="emitStart"
