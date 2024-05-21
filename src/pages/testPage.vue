@@ -7,10 +7,16 @@
             @click="flickSwitch"
             outline
         />
+    </div>
+    <div>
         <q-btn
-            disable
             label="clear local storage"
             @click="clearStorage"
+            outline
+        />
+        <q-btn
+            label="populate from backup storage"
+            @click="backupStorage"
             outline
         />
     </div>
@@ -36,6 +42,9 @@ export default {
         },
         clearStorage () {
             localStorage.removeItem('game_data');
+        },
+        backupStorage () {
+            localStorage.setItem('game_data', localStorage.getItem('backup_game_data'));
         }
     }
 }
