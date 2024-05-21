@@ -7,7 +7,8 @@ export function trade ({ state, commit }, payload) {
 
     const index = state.playerAccount.holdings.findIndex(stock => stock.symbol === payload.symbol);
     payload.index = index;
-
+    console.log(`payload.quantity = ${payload.quantity}`);
+    console.log(typeof payload.quantity);
     if (payload.quantity > 0 && index < 0) {
         payload.case = 'CREATE';
         delete payload.tradeAmt;
@@ -22,11 +23,13 @@ export function trade ({ state, commit }, payload) {
 }
 
 export function resetGame ({ commit }) {
+    console.log('dispatch action reset game');
     commit('setStartCycle');
     commit('resetGame');
 }
 
 export async function initGameData ({ commit, state }, payload) {
+    console.log('no local data');
     commit('setStartCycle');
     commit('keyValidity', true);
     // response 1 is the unhandled raw response
@@ -35,8 +38,8 @@ export async function initGameData ({ commit, state }, payload) {
             params: {
                 access_key: payload
             }
-        });
-
+        }
+    )
     .then(response => {
         return response;
     })
@@ -77,6 +80,7 @@ export async function initGameData ({ commit, state }, payload) {
             await helpers.rateDelay();
             console.log('delay complete');
         }
+        console.log(`about to request ${i}`);
         promises.push(axios.get('http://api.marketstack.com/v1/eod',
             {
                 params: {
@@ -85,13 +89,14 @@ export async function initGameData ({ commit, state }, payload) {
                 }
             }
         )
-            .then(response => {
-                gameData[i].prices = helpers.mapPrices(response.data.data);
-            })
+        .then(response => {
+            gameData[i].prices = helpers.mapPrices(response.data.data);
+        })
         );
     }
 
     Promise.all(promises).then(() => {
+        console.log('all requests resolved, store to local storage next');
         localStorage.setItem('game_data', JSON.stringify(gameData));
         // maybe need a new mutation
         // save the gameData to the store

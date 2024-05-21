@@ -50,10 +50,12 @@ export function setStartCycle (state) {
     // magic number 100 because default data coming back from API is 100 trade days
     const MAX = 100 - state.lastPlayableCycle;
     const result = getRandom(MAX);
+    console.log(`set start cycle to ${result}`);
     state.startCycle = result;
 }
 
 export function resetGame (state) {
+    console.log('mutation reset game');
     state.gameCycle = 0;
     state.playerAccount = {
         funding: 100000 * 100,
