@@ -30,7 +30,7 @@ export async function initGameData ({ commit, state }, payload) {
     commit('setStartCycle');
     commit('keyValidity', true);
     // response 1 is the unhandled raw response
-    const response1 = await axios.get('http://api.marketstack.com/v1/tickers',
+    const response1 = await axios.get('http://api.marketstack.com/v1/exchanges/XNAS/tickers',
         {
             params: {
                 access_key: payload
@@ -51,9 +51,22 @@ export async function initGameData ({ commit, state }, payload) {
     console.log('valid key');
     const gameData = [];
     // the upper limit for i need to change to a bigger data bank
-    for (let i = 0; i < state.totalStockCount; i++) {
-        gameData.push(helpers.trimObj(response1.data.data[i]));
-    };
+    let index = 0;
+    while (gameData.length < state.totalStockCount) {
+        // these two particular stocks are excluded
+        // please see readMe for  more details
+        if (index === 4 || index === 5) {
+            index++;
+            continue;
+        }
+        console.log(response1.data.data.tickers[index].name);
+        gameData.push(helpers.trimObj(response1.data.data.tickers[index]));
+        index++;
+    }
+
+    console.log('start delay, after adding all tickers to gameData');
+    await helpers.rateDelay();
+    console.log('delay complete');
 
     const promises = [];
     for (let i = 0; i < gameData.length; i++) {
