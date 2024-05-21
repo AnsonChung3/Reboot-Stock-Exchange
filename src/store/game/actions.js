@@ -99,9 +99,6 @@ export async function initGameData ({ commit, state }, payload) {
         console.log('all requests resolved, store to local storage next');
         localStorage.setItem('game_data', JSON.stringify(gameData));
         commit('dataValidity');
-        // maybe need a new mutation
-        // save the gameData to the store
-        // it would be useful when resetting the game
         commit('initGameMarket', { data: gameData });
     });
 }
