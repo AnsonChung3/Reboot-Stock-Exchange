@@ -85,7 +85,18 @@ export default {
     },
     methods: {
         emitStart () {
-            this.$emit('startGame');
+            if (this.hasData) {
+                this.$emit('startGame');
+                return;
+            }
+            const isDataReady = () => {
+                if (this.validData) {
+                    console.log("data is not ready from http request");
+                    clearInterval(intervalID);
+                    this.$emit('startGame');
+                }
+            }
+            const intervalID = setInterval(isDataReady, 500);
         },
         fetchNew () {
             this.hasData = false;
@@ -104,6 +115,7 @@ export default {
     },
     created () {
         if (localStorage.getItem('game_data') !== null) {
+            console.log('has data');
             this.hasData = true;
             const data = JSON.parse(localStorage.getItem('game_data'));
             this.$store.commit('game/initGameMarket', { data });
