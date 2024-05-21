@@ -105,21 +105,3 @@ export async function initGameData ({ commit, state }, payload) {
         commit('initGameMarket', { data: gameData });
     });
 }
-
-export async function mockInit ({ commit }) {
-    console.log('action mock init');
-
-    await helpers.rateDelay();
-    console.log('first delay finished');
-
-    await helpers.rateDelay();
-    console.log('second delay finished');
-
-    const data = localStorage.getItem('backup_game_data');
-    localStorage.setItem('game_data', data);
-    commit('initGameMarket', { data: JSON.parse(data) });
-
-    console.log("pretend all http requests are resolved, anyway, data in local storage");
-    commit('dataValidity');
-    console.log("end of action");
-}

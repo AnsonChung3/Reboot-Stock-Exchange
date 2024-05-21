@@ -27,11 +27,6 @@
                 @click="addKeyReqData"
                 outline
             />
-            <q-btn
-                label="mock init"
-                @click="mockInit"
-                outlint
-            />
         </div>
         <div v-if="page === 2">
             <p>The game will fetch the price data for a total of 10 stocks.</p>
@@ -89,10 +84,6 @@ export default {
         }
     },
     methods: {
-        mockInit () {
-            this.$store.dispatch('game/mockInit');
-            this.page++;
-        },
         emitStart () {
             if (this.hasData) {
                 this.$emit('startGame');
