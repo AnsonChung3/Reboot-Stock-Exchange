@@ -3,6 +3,13 @@
     <div>{{ display }}</div>
     <div>
         <q-btn
+            disable
+            label="start test"
+            @click="testInterval"
+            outline
+        />
+        <q-btn
+            disable
             label="flick switch"
             @click="flickSwitch"
             outline
@@ -37,8 +44,24 @@ export default {
     },
     methods: {
         flickSwitch () {
-            this.display = this.var;
             this.var = !this.var;
+        },
+        testInterval () {
+            let count = 0;
+            const isVar = () => {
+                console.log(`interavl ${count}`);
+                count++;
+                if (this.var) {
+                    console.log("now var is true");
+                    clearInterval(intervalID);
+                    this.mockEmit();
+                }
+            }
+            const intervalID = setInterval(isVar, 1000);
+            console.log("end of test");
+        },
+        mockEmit () {
+            alert('emit start');
         },
         clearStorage () {
             localStorage.removeItem('game_data');
