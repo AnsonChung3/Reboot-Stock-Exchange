@@ -68,6 +68,18 @@ export default {
             hasData: false
         }
     },
+    watch: {
+        validKey (newValue) {
+            if (newValue === false) {
+                alert('Please check your API key or the remaining number of http request.');
+            }
+        }
+    },
+    computed: {
+        validKey () {
+            return this.$store.state.game.validKey;
+        }
+    },
     methods: {
         emitStart () {
             this.$emit('startGame');
