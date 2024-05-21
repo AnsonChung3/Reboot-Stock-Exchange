@@ -143,15 +143,6 @@ export default {
             const data = JSON.parse(localStorage.getItem('game_data'));
             this.$store.commit('game/initGameMarket', { data });
         }
-    },
-    created () {
-        if (localStorage.getItem('game_data') === null) {
-            this.$store.dispatch('game/initGameData');
-        } else {
-            console.log('created, else');
-            this.$store.commit('game/setStartCycle', this.$store.getters['game/getStartCycle']);
-            this.initMarketFromLocal()
-        }
     }
 };
 </script>
