@@ -57,6 +57,13 @@ export async function initGameData ({ commit, state }, payload) {
 
     const promises = [];
     for (let i = 0; i < gameData.length; i++) {
+        // insert block code to add 1.5 second after sending 5 requests
+        // rate limit: max 5 requests per sec
+        if (i === 5) {
+            console.log('start delay, help with rate limit');
+            await helpers.rateDelay();
+            console.log('delay complete');
+        }
         promises.push(axios.get('http://api.marketstack.com/v1/eod',
             {
                 params: {
