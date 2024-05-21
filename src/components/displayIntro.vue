@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { axios } from 'boot/axios.js';
+// import { axios } from 'boot/axios.js';
 
 export default {
     data() {
@@ -84,36 +84,26 @@ export default {
         emitStart () {
             this.$emit('startGame');
         },
-        async addAPIKey () {
+        fetchNew () {
+            this.hasData = false;
+            localStorage.removeItem('game_data');
+        },
+        addKeyReqData () {
             const key = this.customerKey;
             if (key === undefined || key === '') {
                 alert('Please input an API key to continue.');
-                return
-            }
-            console.log(key);
-            const validKey = await axios.get('http://api.marketstack.com/v1/eod',
-                {
-                    params: {
-                        access_key: key,
-                        symbols: 'AAPL'
-                    }
-                }
-            )
-            .catch(error => {
-                this.display = error;
-                console.log('uh oh');
-                return false;
-            })
-            if (validKey === false) {
-                alert(`Please make sure you put the correct API key.`);
                 return;
             }
+            this.$store.dispatch('game/initGameData', key);
+            this.customerKey = undefined;
             this.page++;
         }
     },
     created () {
         if (localStorage.getItem('game_data') !== null) {
             this.hasData = true;
+            const data = JSON.parse(localStorage.getItem('game_data'));
+            this.$store.commit('game/initGameMarket', { data });
         }
     }
 };
