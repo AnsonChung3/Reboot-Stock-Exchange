@@ -23,6 +23,11 @@ export function nextDay (state) {
     state.gameCycle += 1;
 }
 
+export function keyValidity (state, payload) {
+    console.log('mutation key validity');
+    state.validKey = payload;
+}
+
 export function initGameMarket (state, payload) {
     // this may or maynot need renaming
     // should add a helper function

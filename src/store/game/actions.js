@@ -28,6 +28,7 @@ export function resetGame ({ commit }) {
 
 export async function initGameData ({ commit, state }, payload) {
     commit('setStartCycle');
+    commit('keyValidity', true);
     // response 1 is the unhandled raw response
     const response1 = await axios.get('http://api.marketstack.com/v1/tickers',
         {
@@ -36,6 +37,18 @@ export async function initGameData ({ commit, state }, payload) {
             }
         });
 
+    .then(response => {
+        return response;
+    })
+    .catch(error => {
+        return error;
+    })
+    if (response1.status !== 200) {
+        console.log('invalid key');
+        commit('keyValidity', false);
+        return;
+    }
+    console.log('valid key');
     const gameData = [];
     // the upper limit for i need to change to a bigger data bank
     for (let i = 0; i < state.totalStockCount; i++) {
