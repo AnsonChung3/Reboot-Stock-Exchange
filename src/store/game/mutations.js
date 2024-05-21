@@ -29,17 +29,11 @@ export function keyValidity (state, payload) {
 }
 
 export function initGameMarket (state, payload) {
-    // this may or maynot need renaming
-    // should add a helper function
-    // return an array of 4 random numbers
-    // state.marketData.push(localStorage.data[array])
-    // paylod into this mutation should contain all of the stocks
-    // but if I am pulling it from state, then i wouldn't need payload?
-    // worth checking if payload can be empty
+    console.log('init game market');
     const array = getArrayOfRandom(4, state.totalStockCount);
-    console.log(array)
+    console.log('playing with the following ones');
+    console.log(array);
 
-    // for (let i = 0; i < payload.data.length; i++) {
     for (let i = 0; i < array.length; i++) {
         const index = array[i];
         state.marketData.push(payload.data[index]);
