@@ -78,6 +78,9 @@ export default {
     computed: {
         validKey () {
             return this.$store.state.game.validKey;
+        },
+        validData () {
+            return this.$store.state.game.validData;
         }
     },
     methods: {

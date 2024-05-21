@@ -28,6 +28,10 @@ export function keyValidity (state, payload) {
     state.validKey = payload;
 }
 
+export function dataValidity (state) {
+    state.validData = !state.validData;
+}
+
 export function initGameMarket (state, payload) {
     console.log('init game market');
     const array = getArrayOfRandom(4, state.totalStockCount);

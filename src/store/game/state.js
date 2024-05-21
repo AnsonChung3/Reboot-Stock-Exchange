@@ -1,6 +1,7 @@
 export default function () {
     return {
         validKey: true,
+        validData: false,
         // game design is request 10 stock prices from API
         // and play with random 4 for each game
         totalStockCount: 10,
