@@ -91,7 +91,7 @@ export default {
     watch: {
         gameCycle (newValue) {
             if (newValue === this.lastPlayableCycle - 1) {
-                alert('the next cycle is the last playable');
+                alert('The next cycle is the last playable');
             } else if (newValue === this.lastPlayableCycle) {
                 this.requestConfirm = !this.requestConfirm;
             }
