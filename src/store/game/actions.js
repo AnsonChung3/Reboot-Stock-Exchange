@@ -6,6 +6,7 @@ export function trade ({ state, commit }, payload) {
 
     const index = state.playerAccount.holdings.findIndex(stock => stock.symbol === payload.symbol);
     payload.index = index;
+
     if (payload.quantity > 0 && index < 0) {
         payload.case = 'CREATE';
         delete payload.tradeAmt;
@@ -45,12 +46,12 @@ export async function initGameData ({ commit, state }, payload) {
         commit('keyValidity', false);
         return;
     }
+
     const gameData = [];
-    // the upper limit for i need to change to a bigger data bank
     let index = 0;
     while (gameData.length < state.totalStockCount) {
         // these two particular stocks are excluded
-        // please see readMe for  more details
+        // please see Limitation(1) in readMe for more details
         if (index === 4 || index === 5) {
             index++;
             continue;
