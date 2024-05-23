@@ -17,6 +17,7 @@
             <display-end-game @restart="startNewgame"/>
         </div>
         <div v-else>
+            <div>Current Game Cycle: {{ gameCycle+1 }}</div>
             <div class="row">
                 <div class="col-7">
                     <q-tabs
