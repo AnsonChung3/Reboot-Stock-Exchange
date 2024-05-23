@@ -11,7 +11,7 @@
             />
         </div>
         <div v-else-if="tab === 'introScreen'">
-            <display-intro @startGame="showMarket" />
+            <display-intro @startGame="startNewgame"/>
         </div>
         <div v-else-if="tab === 'endGameScreen'">
             <display-end-game @restart="startNewgame"/>
@@ -128,16 +128,13 @@ export default {
             this.endGameConfirm = true;
             this.nextDay();
         },
-        showMarket () {
-            this.tab = 'market';
-        },
         startNewgame () {
             console.log('start new game');
             this.$store.commit('game/setStartCycle');
             this.$store.commit('game/resetGame');
             this.initMarketFromLocal();
             this.endGameConfirm = false;
-            this.showMarket();
+            this.tab = 'market';
         },
         initMarketFromLocal () {
             const data = JSON.parse(localStorage.getItem('game_data'));
