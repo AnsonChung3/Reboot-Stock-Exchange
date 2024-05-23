@@ -130,9 +130,7 @@ export default {
             this.nextDay();
         },
         startNewgame () {
-            console.log('start new game');
-            this.$store.commit('game/setStartCycle');
-            this.$store.commit('game/resetGame');
+            this.$store.dispatch('game/resetGame');
             this.initMarketFromLocal();
             this.endGameConfirm = false;
             this.tab = 'market';
