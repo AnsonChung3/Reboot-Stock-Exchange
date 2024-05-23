@@ -24,7 +24,6 @@ export function nextDay (state) {
 }
 
 export function keyValidity (state, payload) {
-    console.log('mutation key validity');
     state.validKey = payload;
 }
 
@@ -33,10 +32,7 @@ export function dataValidity (state) {
 }
 
 export function initGameMarket (state, payload) {
-    console.log('init game market');
     const array = getArrayOfRandom(4, state.totalStockCount);
-    console.log('playing with the following ones');
-    console.log(array);
 
     for (let i = 0; i < array.length; i++) {
         const index = array[i];
@@ -48,12 +44,10 @@ export function setStartCycle (state) {
     // magic number 100 because default data coming back from API is 100 trade days
     const MAX = 100 - state.lastPlayableCycle;
     const result = getRandom(MAX);
-    console.log(`set start cycle to ${result}`);
     state.startCycle = result;
 }
 
 export function resetGame (state) {
-    console.log('mutation reset game');
     state.gameCycle = 0;
     state.playerAccount = {
         funding: 100000 * 100,
