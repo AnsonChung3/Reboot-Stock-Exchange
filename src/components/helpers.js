@@ -28,5 +28,5 @@ export function getArrayOfRandom (length, max) {
 }
 
 export function rateDelay () {
-    return new Promise(resolve => setTimeout(resolve, 2000));
+    return new Promise(resolve => setTimeout(resolve, 1500));
 }
