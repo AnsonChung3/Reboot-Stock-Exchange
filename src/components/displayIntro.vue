@@ -3,7 +3,7 @@
         <h2>Introduction</h2>
         <div v-if="page === 0">
             <p>Thank you for trying out my personal project!</p>
-            <p>You will be shown prices pulled from external API with real market data.</p>
+            <p>You will be shown prices pulled from an external API with real market data.</p>
             <p>The goal is to profit as much as possible within 14 trade days.</p>
             <br>
             <q-btn
@@ -33,6 +33,7 @@
             <p>4 stocks will be randomly chosen for each game.</p>
             <p>The returned data from the API will be stored in local storage. You can see it under the "Application" tab if you go to your browser dev tools.</p>
             <p>Time for a little game!</p>
+            <p><b>Http requests may take a few seconds to resolve due to rate limit. You will be automatically taken to the game when it's ready.</b></p>
             <q-btn
                 label="Start trading"
                 @click="emitStart"
@@ -57,7 +58,6 @@
 </template>
 
 <script>
-// import { axios } from 'boot/axios.js';
 
 export default {
     data() {
@@ -71,7 +71,7 @@ export default {
     watch: {
         validKey (newValue) {
             if (newValue === false) {
-                alert('Please check your API key or the remaining number of http request.');
+                alert('Please check your API key or the remaining number of http request and refresh the page.');
             }
         }
     },
@@ -91,7 +91,6 @@ export default {
             }
             const isDataReady = () => {
                 if (this.validData) {
-                    console.log("data is not ready from http request");
                     clearInterval(intervalID);
                     this.$emit('startGame');
                 }
@@ -115,7 +114,6 @@ export default {
     },
     created () {
         if (localStorage.getItem('game_data') !== null) {
-            console.log('has data');
             this.hasData = true;
             const data = JSON.parse(localStorage.getItem('game_data'));
             this.$store.commit('game/initGameMarket', { data });
