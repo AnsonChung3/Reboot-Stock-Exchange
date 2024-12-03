@@ -13,7 +13,6 @@ npm install
 ```bash
 quasar dev
 ```
-Default URL for frontend: http://localhost:8080/game
 
 ## Features
 1. Request data from API
